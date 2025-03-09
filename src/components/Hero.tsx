@@ -16,11 +16,11 @@ export default function Hero({
 }: PlayerProps) {
   return (
     <div className="relative">
-      <div className="top-1/2 left-1/2 absolute flex justify-center items-center p-2 w-full h-full -translate-x-1/2 -translate-y-1/2">
-        <div className="w-full max-w-[400px] h-[450px]">
+      <div className="top-1/2 left-1/2 absolute flex justify-center items-center p-2 w-full h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="w-full max-w-[400px] h-[450px] pointer-events-none">
           <img
             src={Stream}
-            className="w-full h-full object-center object-cover"
+            className="w-full h-full object-center object-cover pointer-events-none"
           />
         </div>
       </div>

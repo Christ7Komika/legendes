@@ -15,7 +15,7 @@ export default function UpTo() {
     <button
       onClick={scrollToTop}
       className={clsx(
-        "right-3 z-20 fixed flex justify-center items-center bg-zinc-100 w-12 h-14 transition-all duration-500 cursor-pointer",
+        "right-3 z-20 fixed flex justify-center items-center bg-zinc-100 w-12 h-12 transition-all duration-500 cursor-pointer",
         scroll < 3500 ? "bottom-24 opacity-0" : "bottom-28 opacity-100"
       )}
     >

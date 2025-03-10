@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import {
   FacebookIcon,
   MenuIcon,
@@ -11,11 +11,15 @@ import useScroll from "../hooks/useScroll";
 import clsx from "clsx";
 import { useWidth } from "../hooks/useWidth";
 import { useState } from "react";
+import useAlbums from "../stores/albums";
+import { NAVBAR_SCROLL_CHANGE } from "../lib/constant";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
   const scroll = useScroll();
   const width = useWidth();
+  const albums = useAlbums.use.albums();
 
   function handleOpen() {
     setOpen(!open);
@@ -25,11 +29,11 @@ export default function Navbar() {
     <nav
       className={clsx(
         "top-0 left-0 z-20 fixed flex justify-between items-center px-8 md:px-16 w-dvw transition-all duration-500",
-        scroll >= 200 && "bg-white",
+        scroll >= NAVBAR_SCROLL_CHANGE && "bg-white",
         width <= 768 && "bg-white"
       )}
       style={{
-        height: scroll >= 200 || width <= 768 ? 80 : 160,
+        height: scroll >= NAVBAR_SCROLL_CHANGE || width <= 768 ? 80 : 160,
       }}
     >
       <a href="/">
@@ -38,7 +42,9 @@ export default function Navbar() {
       <ul
         className={clsx(
           "hidden md:flex items-center gap-x-4 font-bold",
-          scroll >= 200 ? "text-black" : "text-white"
+          pathname === "/" && scroll >= NAVBAR_SCROLL_CHANGE && "text-black",
+          pathname === "/" && scroll < NAVBAR_SCROLL_CHANGE && "text-white",
+          pathname !== "/" && "text-black"
         )}
       >
         <li>
@@ -48,28 +54,119 @@ export default function Navbar() {
           <NavLink to="/">CONTACT</NavLink>
         </li>
         <li>
-          <NavLink to="/">BUY</NavLink>
+          <NavLink to="/buy">BUY</NavLink>
         </li>
       </ul>
       <ul className="hidden md:flex items-center gap-x-6">
         <li>
           <NavLink to="/">
             <span className="flex justify-center items-center w-6 h-6">
-              <FacebookIcon color={scroll >= 200 ? "#000" : "#fff"} />
+              <FacebookIcon
+                className={clsx(
+                  pathname === "/" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "fill-black",
+                  pathname === "/" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "fill-white",
+                  pathname !== "/" && "fill-black"
+                )}
+              />
             </span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/">
             <span className="flex justify-center items-center h-6">
-              <SoundCloudIcon color={scroll >= 200 ? "#000" : "#fff"} />
+              <SoundCloudIcon
+                className={clsx(
+                  pathname === "/" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "fill-black",
+                  pathname === "/" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "fill-white",
+                  pathname !== "/" && "fill-black"
+                )}
+              />
             </span>
           </NavLink>
         </li>
         <li>
-          <span className="flex justify-center items-center w-6 h-6">
-            <ShoppingCartIcon color={scroll >= 200 ? "#000" : "#fff"} />
-          </span>
+          {albums.length > 0 ? (
+            <NavLink
+              to="/cart"
+              className="relative flex justify-center items-center w-6 h-6"
+            >
+              <span
+                className={clsx(
+                  "-top-1.5 -right-1 absolute flex justify-center items-center border-2 rounded-full w-4 h-4 text-[8px]",
+                  pathname === "/" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "border-white bg-black text-white",
+                  pathname === "/" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "border-black bg-white text-black",
+                  pathname !== "/" &&
+                    "fill-black" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "border-white bg-black text-white",
+                  pathname !== "/" &&
+                    "fill-black" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "bg-black text-white border-[#eee]"
+                )}
+              >
+                {albums.length >= 9 ? "+" : albums.length}
+              </span>
+              <ShoppingCartIcon
+                className={clsx(
+                  pathname === "/" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "fill-black",
+                  pathname === "/" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "fill-white",
+                  pathname !== "/" && "fill-black"
+                )}
+              />
+            </NavLink>
+          ) : (
+            <span className="relative flex justify-center items-center w-6 h-6">
+              <span
+                className={clsx(
+                  "-top-1.5 -right-1 absolute flex justify-center items-center border-2 rounded-full w-4 h-4 text-[8px]",
+                  pathname === "/" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "border-white bg-black text-white",
+                  pathname === "/" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "border-black bg-white text-black",
+                  pathname !== "/" &&
+                    "fill-black" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "border-white bg-black text-white",
+                  pathname !== "/" &&
+                    "fill-black" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "bg-black text-white border-[#eee]"
+                )}
+              >
+                {albums.length >= 9 ? "+" : albums.length}
+              </span>
+              <ShoppingCartIcon
+                className={clsx(
+                  pathname === "/" &&
+                    scroll >= NAVBAR_SCROLL_CHANGE &&
+                    "fill-black",
+                  pathname === "/" &&
+                    scroll < NAVBAR_SCROLL_CHANGE &&
+                    "fill-white",
+                  pathname !== "/" && "fill-black"
+                )}
+              />
+            </span>
+          )}
         </li>
       </ul>
       <div
@@ -102,18 +199,24 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink
-            to="/"
+            to="/buy"
             className="flex justify-center items-center py-2 border-zinc-200 border-t w-full"
           >
             BUY
           </NavLink>
         </li>
         <li className="flex justify-center items-center gap-x-6 py-2 border-zinc-200 border-t w-full h-[41px]">
-          <NavLink to="/">
+          {albums.length > 0 ? (
+            <NavLink to="/cart">
+              <span className="flex justify-center items-center w-4 h-4">
+                <ShoppingCartIcon color="#000" />
+              </span>
+            </NavLink>
+          ) : (
             <span className="flex justify-center items-center w-4 h-4">
               <ShoppingCartIcon color="#000" />
             </span>
-          </NavLink>
+          )}
           <NavLink to="/">
             <span className="flex justify-center items-center w-4 h-4">
               <SoundCloudIcon color="#000" />

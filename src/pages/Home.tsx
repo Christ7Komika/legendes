@@ -14,6 +14,7 @@ export default function Home() {
     useAudio({ audioUrl: Song });
   return (
     <div className="relative">
+      <title>LEGENDES | Accueil</title>
       <UpTo />
       <Player
         waveRef={waveRef}

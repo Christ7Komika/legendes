@@ -16,6 +16,8 @@ export default function CartList() {
   const scroll = useScroll();
   const width = useWidth();
   const pageHeight = usePageHeight();
+
+  console.log({ width, scroll, pageHeight, pos: pageHeight - scroll });
   return (
     <div className="px-2 md:px-4 lg:px-8 py-24 min-h-dvh">
       {albums.length === 0 && (

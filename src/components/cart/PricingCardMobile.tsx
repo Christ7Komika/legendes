@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import SlideCartList from "./SlideCartList";
 import { AlbumCartType } from "../../types/album";
 import { getPrices, getQuantities } from "../../lib/utils";
+import useCheckoutLink from "../../hooks/useCheckoutLink";
 
 type PricingCardMobileProps = {
   albums: AlbumCartType[];
@@ -17,6 +18,7 @@ export default function PricingCardMobile({
   setHeight,
 }: PricingCardMobileProps) {
   const [open, setOpen] = useState(false);
+  const checkoutLink = useCheckoutLink();
 
   useLayoutEffect(() => {
     setHeight(open);
@@ -69,7 +71,9 @@ export default function PricingCardMobile({
         </button>
       </div>
       <div className="gap-x-2 gap-y-2 sm:gap-x-3 grid grid-cols-1 xss:grid-cols-[1.8fr_1fr_1fr] px-2 sm:px-8">
-        <Button type="stripe" />
+        <a href={checkoutLink}>
+          <Button type="stripe" />
+        </a>
         <Button type="mtn" />
         <Button type="airtel" />
       </div>

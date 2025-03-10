@@ -4,14 +4,21 @@ import { AirtelIcon } from "../icons/Icons";
 
 type ButtonProps = {
   type?: "stripe" | "mtn" | "airtel";
+  onClick?: () => void;
 };
 
-export default function Button({ type = "stripe" }: ButtonProps) {
+export default function Button({ onClick, type = "stripe" }: ButtonProps) {
+  function handleClick() {
+    if (onClick) {
+      onClick();
+    }
+  }
   return (
-    <div
+    <button
+      onClick={handleClick}
       className={clsx(
-        "flex justify-center items-center px-4 rounded-lg w-full h-12",
-        type === "stripe" && "bg-[#0E4595]",
+        "flex justify-center items-center px-4 rounded-lg w-full h-12 cursor-pointer",
+        type === "stripe" && "bg-[#363b38]",
         type === "mtn" && "bg-[#FFCC00]",
         type === "airtel" && "bg-[#e90000]"
       )}
@@ -31,6 +38,6 @@ export default function Button({ type = "stripe" }: ButtonProps) {
           <AirtelIcon />
         </span>
       )}
-    </div>
+    </button>
   );
 }

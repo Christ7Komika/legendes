@@ -355,12 +355,8 @@ export function EmptyIcon({ color = "#000", className }: IconProps) {
 export function VisaCardIcon() {
   return (
     <svg
-      width="800px"
-      height="800px"
-      viewBox="0 -140 780 780"
-      enableBackground="new 0 0 780 500"
-      version="1.1"
       xmlSpace="preserve"
+      viewBox="0 0 256 256"
       style={{
         width: "100%",
         height: "auto",
@@ -368,15 +364,95 @@ export function VisaCardIcon() {
       }}
       preserveAspectRatio="xMidYMid meet"
     >
-      <rect width="780" height="500" fill="#0E4595" />
-      <path
-        d="m293.2 348.73l33.361-195.76h53.36l-33.385 195.76h-53.336zm246.11-191.54c-10.57-3.966-27.137-8.222-47.822-8.222-52.725 0-89.865 26.55-90.18 64.603-0.299 28.13 26.514 43.822 46.752 53.186 20.771 9.595 27.752 15.714 27.654 24.283-0.131 13.121-16.586 19.116-31.922 19.116-21.357 0-32.703-2.967-50.227-10.276l-6.876-3.11-7.489 43.823c12.463 5.464 35.51 10.198 59.438 10.443 56.09 0 92.5-26.246 92.916-66.882 0.199-22.269-14.016-39.216-44.801-53.188-18.65-9.055-30.072-15.099-29.951-24.268 0-8.137 9.668-16.839 30.557-16.839 17.449-0.27 30.09 3.535 39.938 7.5l4.781 2.26 7.232-42.429m137.31-4.223h-41.232c-12.773 0-22.332 3.487-27.941 16.234l-79.244 179.4h56.031s9.16-24.123 11.232-29.418c6.125 0 60.555 0.084 68.338 0.084 1.596 6.853 6.49 29.334 6.49 29.334h49.514l-43.188-195.64zm-65.418 126.41c4.412-11.279 21.26-54.723 21.26-54.723-0.316 0.522 4.379-11.334 7.074-18.684l3.605 16.879s10.219 46.729 12.354 56.528h-44.293zm-363.3-126.41l-52.24 133.5-5.567-27.13c-9.725-31.273-40.025-65.155-73.898-82.118l47.766 171.2 56.456-0.064 84.004-195.39h-56.521"
-        fill="#ffffff"
-      />
-      <path
-        d="m146.92 152.96h-86.041l-0.681 4.073c66.938 16.204 111.23 55.363 129.62 102.41l-18.71-89.96c-3.23-12.395-12.597-16.094-24.186-16.527"
-        fill="#F2AE14"
-      />
+      <g
+        style={{
+          stroke: "none",
+          strokeWidth: 0,
+          strokeDasharray: "none",
+          strokeLinecap: "butt",
+          strokeLinejoin: "miter",
+          strokeMiterlimit: 10,
+          fill: "none",
+          fillRule: "nonzero",
+          opacity: 1,
+        }}
+      >
+        <path
+          d="M84.83 72.913H5.17A5.17 5.17 0 0 1 0 67.743V22.257a5.17 5.17 0 0 1 5.17-5.17h79.66a5.17 5.17 0 0 1 5.17 5.17v45.485a5.17 5.17 0 0 1-5.17 5.171z"
+          style={{
+            stroke: "none",
+            strokeWidth: 1,
+            strokeDasharray: "none",
+            strokeLinecap: "butt",
+            strokeLinejoin: "miter",
+            strokeMiterlimit: 10,
+            fill: "#363b38",
+            fillRule: "nonzero",
+            opacity: 1,
+          }}
+          transform="matrix(2.81 0 0 2.81 1.407 1.407)"
+        />
+        <path
+          d="M84.83 17.087h-1.404v23.531c0 16.021-12.987 29.008-29.008 29.008H.366a5.161 5.161 0 0 0 4.804 3.287h79.66a5.17 5.17 0 0 0 5.17-5.17V22.257a5.17 5.17 0 0 0-5.17-5.17z"
+          style={{
+            stroke: "none",
+            strokeWidth: 1,
+            strokeDasharray: "none",
+            strokeLinecap: "butt",
+            strokeLinejoin: "miter",
+            strokeMiterlimit: 10,
+            fill: "#2e322f",
+            fillRule: "nonzero",
+            opacity: 1,
+          }}
+          transform="matrix(2.81 0 0 2.81 1.407 1.407)"
+        />
+        <path
+          d="M18.972 35.272H7.931a2.123 2.123 0 0 1-2.123-2.123v-5.945c0-1.173.951-2.123 2.123-2.123h11.041c1.173 0 2.123.951 2.123 2.123v5.945c0 1.172-.95 2.123-2.123 2.123z"
+          style={{
+            stroke: "none",
+            strokeWidth: 1,
+            strokeDasharray: "none",
+            strokeLinecap: "butt",
+            strokeLinejoin: "miter",
+            strokeMiterlimit: 10,
+            fill: "#eaa500",
+            fillRule: "nonzero",
+            opacity: 1,
+          }}
+          transform="matrix(2.81 0 0 2.81 1.407 1.407)"
+        />
+        <path
+          d="M19.885 46.116H7.018a1.116 1.116 0 1 1 0-2.234h12.868a1.116 1.116 0 1 1-.001 2.234zM38.684 46.116H25.817a1.116 1.116 0 1 1 0-2.234h12.868a1.116 1.116 0 1 1-.001 2.234zM57.484 46.116H44.615a1.116 1.116 0 1 1 0-2.234h12.869a1.116 1.116 0 1 1 0 2.234zM76.283 46.116H63.414a1.116 1.116 0 1 1 0-2.234h12.869a1.116 1.116 0 1 1 0 2.234zM31.052 65.099H7.018a1.116 1.116 0 1 1 0-2.234h24.034a1.116 1.116 0 1 1 0 2.234zM31.052 58.399h-8.401a1.116 1.116 0 1 1 0-2.234h8.401a1.116 1.116 0 1 1 0 2.234zM73.658 55.457c-1.58 0-2.974.734-3.908 1.862-.935-1.128-2.329-1.862-3.908-1.862a5.097 5.097 0 0 0 0 10.192c1.58 0 2.974-.734 3.908-1.862.935 1.128 2.329 1.862 3.908 1.862a5.097 5.097 0 0 0 0-10.192z"
+          style={{
+            stroke: "none",
+            strokeWidth: 1,
+            strokeDasharray: "none",
+            strokeLinecap: "butt",
+            strokeLinejoin: "miter",
+            strokeMiterlimit: 10,
+            fill: "#545c56",
+            fillRule: "nonzero",
+            opacity: 1,
+          }}
+          transform="matrix(2.81 0 0 2.81 1.407 1.407)"
+        />
+        <path
+          d="M70.668 64.649a4.991 4.991 0 0 0 2.99.999 5.097 5.097 0 0 0 4.211-7.963 29.148 29.148 0 0 1-7.201 6.964z"
+          style={{
+            stroke: "none",
+            strokeWidth: 1,
+            strokeDasharray: "none",
+            strokeLinecap: "butt",
+            strokeLinejoin: "miter",
+            strokeMiterlimit: 10,
+            fill: "#494f4a",
+            fillRule: "nonzero",
+            opacity: 1,
+          }}
+          transform="matrix(2.81 0 0 2.81 1.407 1.407)"
+        />
+      </g>
     </svg>
   );
 }

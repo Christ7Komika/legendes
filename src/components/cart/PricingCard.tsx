@@ -1,4 +1,5 @@
-import { getPrice, getPrices, getQuantities } from "../../lib/utils";
+import useCheckoutLink from "../../hooks/useCheckoutLink";
+import { getPrices, getQuantities } from "../../lib/utils";
 import { AlbumCartType } from "../../types/album";
 import Button from "../ui/Button";
 import CardCart from "./CardCart";
@@ -9,6 +10,7 @@ type PricingCardProps = {
 };
 
 export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
+  const checkoutLink = useCheckoutLink();
   return (
     <div className="top-[140px] left-0 sticky space-y-2 p-3 border-2 border-neutral-300 border-dashed rounded-xl w-full">
       {albums.map((album) => (
@@ -37,7 +39,9 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
         </p>
 
         <div className="gap-y-2 grid grid-cols-1 pt-2">
-          <Button type="stripe" />
+          <a href={checkoutLink}>
+            <Button type="stripe" />
+          </a>
           <Button type="mtn" />
           <Button type="airtel" />
         </div>

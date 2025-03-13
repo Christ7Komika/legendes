@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AlbumCartType } from "../../types/album";
 import CardCart from "./CardCart";
 
@@ -14,20 +14,13 @@ export default function SlideCartList({
   removeAlbum,
 }: SlideCartListProps) {
   const [width, setWidth] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log({
-      scroll: sliderRef.current!.scrollWidth,
-      offset: sliderRef.current!.offsetWidth,
-    });
-    setWidth(
-      sliderRef.current!.offsetWidth / albums.length - albums.length * 10
-    );
-  }, []);
+    setWidth(300 * (albums.length - 1) + 40);
+  }, [width, albums.length]);
 
   return (
-    <motion.div ref={sliderRef} className="w-full overflow-hidden">
+    <motion.div className="w-full overflow-hidden">
       <motion.div
         className="flex gap-2 first:ml-[10px] py-[10px] w-full"
         drag="x"

@@ -3,33 +3,42 @@ import { UpIcon } from "../icons/Icons";
 import Button from "../ui/Button";
 import SlideCartList from "./SlideCartList";
 import { AlbumCartType } from "../../types/album";
-import { getPrices, getQuantities } from "../../lib/utils";
-import useCheckoutLink from "../../hooks/useCheckoutLink";
+import { getPrices } from "../../lib/utils";
+import { SERVER_HOST } from "../../lib/constant";
+import axios from "axios";
+import useArticle from "../../stores/article";
 
 type PricingCardMobileProps = {
   albums: AlbumCartType[];
   removeAlbum: (id: number) => void;
-  setHeight: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function PricingCardMobile({
   albums,
   removeAlbum,
-  setHeight,
 }: PricingCardMobileProps) {
   const [open, setOpen] = useState(false);
-  const checkoutLink = useCheckoutLink();
-
-  useLayoutEffect(() => {
-    setHeight(open);
-  }, []);
-
-  useEffect(() => {
-    setHeight(open);
-  }, [open]);
+  const setId = useArticle.use.setId();
 
   function handleOpen() {
     setOpen(!open);
+  }
+
+  async function handleStripe(e: React.SyntheticEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    const response = await axios({
+      method: "post",
+      url: `${SERVER_HOST}/create-checkout-session`,
+      data: { playlist: albums },
+      timeout: 30000,
+    });
+
+    const { id, url } = response.data;
+    if (id && url) {
+      setId(id);
+      window.location = url;
+    }
   }
 
   return (
@@ -44,7 +53,7 @@ export default function PricingCardMobile({
       >
         <div className="space-y-0.5">
           <h2 className="px-2 sm:px-8 font-semibold text-neutral-600 text-sm uppercase">
-            {getQuantities(albums)} articles
+            {albums.length} article{albums.length > 1 && "s"}
           </h2>
           <SlideCartList albums={albums} removeAlbum={removeAlbum} />
         </div>
@@ -71,11 +80,9 @@ export default function PricingCardMobile({
         </button>
       </div>
       <div className="gap-x-2 gap-y-2 sm:gap-x-3 grid grid-cols-1 xss:grid-cols-[1.8fr_1fr_1fr] px-2 sm:px-8">
-        <a href={checkoutLink}>
-          <Button type="stripe" />
-        </a>
-        <Button type="mtn" />
-        <Button type="airtel" />
+        <Button type="stripe" onClick={handleStripe} />
+        {/* <Button type="mtn" />
+        <Button type="airtel" /> */}
       </div>
     </div>
   );

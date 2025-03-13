@@ -1,5 +1,7 @@
-import useCheckoutLink from "../../hooks/useCheckoutLink";
-import { getPrices, getQuantities } from "../../lib/utils";
+import axios from "axios";
+import { SERVER_HOST } from "../../lib/constant";
+import { getPrices } from "../../lib/utils";
+import useArticle from "../../stores/article";
 import { AlbumCartType } from "../../types/album";
 import Button from "../ui/Button";
 import CardCart from "./CardCart";
@@ -10,12 +12,32 @@ type PricingCardProps = {
 };
 
 export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
-  const checkoutLink = useCheckoutLink();
+  const setId = useArticle.use.setId();
+
+  async function handleStripe(e: React.SyntheticEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    const response = await axios({
+      method: "post",
+      url: `${SERVER_HOST}/create-checkout-session`,
+      data: { playlist: albums },
+      timeout: 30000,
+    });
+
+    const { id, url } = response.data;
+    if (id && url) {
+      setId(id);
+      window.location = url;
+    }
+  }
+
   return (
     <div className="top-[140px] left-0 sticky space-y-2 p-3 border-2 border-neutral-300 border-dashed rounded-xl w-full">
-      {albums.map((album) => (
-        <CardCart key={album.id} album={album} removeAlbum={removeAlbum} />
-      ))}
+      <div className="space-y-2 max-h-[230px] overflow-y-auto">
+        {albums.map((album) => (
+          <CardCart key={album.id} album={album} removeAlbum={removeAlbum} />
+        ))}
+      </div>
       <div className="bg-white p-3 rounded-lg w-full">
         <h2 className="font-semibold text-neutral-500 text-lg uppercase">
           Total
@@ -23,7 +45,7 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
         <p className="flex gap-x-2 text-neutral-400">
           <span className="flex w-28">Article Total </span>{" "}
           <span className="font-semibold text-neutral-600">
-            {getQuantities(albums)}
+            {albums.length}
           </span>
         </p>
         <p className="flex gap-x-2 text-neutral-400">
@@ -39,11 +61,9 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
         </p>
 
         <div className="gap-y-2 grid grid-cols-1 pt-2">
-          <a href={checkoutLink}>
-            <Button type="stripe" />
-          </a>
-          <Button type="mtn" />
-          <Button type="airtel" />
+          <Button type="stripe" onClick={handleStripe} />
+          {/* <Button type="mtn" />
+          <Button type="airtel" /> */}
         </div>
       </div>
     </div>

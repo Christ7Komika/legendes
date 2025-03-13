@@ -10,7 +10,7 @@ import Logo from "../../public/assets/logo.png";
 import useScroll from "../hooks/useScroll";
 import clsx from "clsx";
 import { useWidth } from "../hooks/useWidth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAlbums from "../stores/albums";
 import { NAVBAR_SCROLL_CHANGE } from "../lib/constant";
 
@@ -20,6 +20,10 @@ export default function Navbar() {
   const scroll = useScroll();
   const width = useWidth();
   const albums = useAlbums.use.albums();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function handleOpen() {
     setOpen(!open);
@@ -41,7 +45,7 @@ export default function Navbar() {
       </a>
       <ul
         className={clsx(
-          "hidden md:flex items-center gap-x-4 font-bold",
+          "hidden md:flex items-center gap-x-8 font-bold",
           pathname === "/" && scroll >= NAVBAR_SCROLL_CHANGE && "text-black",
           pathname === "/" && scroll < NAVBAR_SCROLL_CHANGE && "text-white",
           pathname !== "/" && "text-black"
@@ -51,10 +55,10 @@ export default function Navbar() {
           <NavLink to="/">ALBUM</NavLink>
         </li>
         <li>
-          <NavLink to="/">CONTACT</NavLink>
+          <NavLink to="/contact">CONTACT</NavLink>
         </li>
         <li>
-          <NavLink to="/buy">BUY</NavLink>
+          <NavLink to="/boutique">BOUTIQUE</NavLink>
         </li>
       </ul>
       <ul className="hidden md:flex items-center gap-x-6">
@@ -95,7 +99,7 @@ export default function Navbar() {
         <li>
           {albums.length > 0 ? (
             <NavLink
-              to="/cart"
+              to="/panier"
               className="relative flex justify-center items-center w-6 h-6"
             >
               <span
@@ -191,7 +195,7 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink
-            to="/"
+            to="/contact"
             className="flex justify-center items-center py-2 border-zinc-200 border-t w-full"
           >
             CONTACT
@@ -199,15 +203,15 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink
-            to="/buy"
+            to="/boutique"
             className="flex justify-center items-center py-2 border-zinc-200 border-t w-full"
           >
-            BUY
+            BOUTIQUE
           </NavLink>
         </li>
         <li className="flex justify-center items-center gap-x-6 py-2 border-zinc-200 border-t w-full h-[41px]">
           {albums.length > 0 ? (
-            <NavLink to="/cart">
+            <NavLink to="/panier">
               <span className="flex justify-center items-center w-4 h-4">
                 <ShoppingCartIcon color="#000" />
               </span>

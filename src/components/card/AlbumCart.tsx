@@ -1,18 +1,12 @@
 import useAlbums from "../../stores/albums";
 import { AlbumCartType } from "../../types/album";
 
-export default function AlbumCart({
-  id,
-  cover,
-  title,
-  price,
-  quantity,
-}: AlbumCartType) {
+export default function AlbumCart({ id, cover, title, price }: AlbumCartType) {
   const addAlbum = useAlbums.use.addAlbum();
   const album = useAlbums.use.albums();
 
   function handleAlbum() {
-    const album = { id, cover, title, price, quantity };
+    const album = { id, cover, title, price };
     addAlbum(album);
   }
 

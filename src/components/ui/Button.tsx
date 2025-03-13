@@ -1,16 +1,17 @@
 import clsx from "clsx";
 import { MTNIcon, VisaCardIcon } from "../icons/Icons";
 import { AirtelIcon } from "../icons/Icons";
+import React from "react";
 
 type ButtonProps = {
   type?: "stripe" | "mtn" | "airtel";
-  onClick?: () => void;
+  onClick?: (e: React.SyntheticEvent) => void;
 };
 
 export default function Button({ onClick, type = "stripe" }: ButtonProps) {
-  function handleClick() {
+  function handleClick(e: React.SyntheticEvent) {
     if (onClick) {
-      onClick();
+      onClick(e);
     }
   }
   return (

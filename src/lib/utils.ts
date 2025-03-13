@@ -5,13 +5,8 @@ export function getPrice(price: string): number {
     return Number((p.split(".")[0]).replace(",", ""));
 }
 
-
-export function getQuantities(datas: AlbumCartType[]): number {
-    return datas.reduce((prev, curr) => prev + curr.quantity, 0)
-}
-
 export function getPrices(datas: AlbumCartType[]): number {
-    return datas.reduce((prev, curr) => prev + (curr.quantity * getPrice(curr.price)), 0)
+    return datas.reduce((prev, curr) => prev + (1 * getPrice(curr.price)), 0)
 }
 
 export function formatPrice(price: number): string {
@@ -34,4 +29,9 @@ export function formatPrice(price: number): string {
     }
 
     return price.toString();
+}
+
+export function isValidEmail(email: string) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
 }

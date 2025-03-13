@@ -10,7 +10,6 @@ gsap.registerPlugin(useGSAP);
 
 export default function Header() {
   const { x } = useMouse();
-  console.log({ x });
 
   const container = useRef<HTMLHeadElement>(null);
   const title = useRef<HTMLHeadingElement>(null);

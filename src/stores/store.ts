@@ -9,7 +9,7 @@ export const cookieStorage: StateStorage = {
         return getCookie(name) ?? null;
     },
     setItem: (name: string, value: string) => {
-        setCookie(name, value, { expires: 1 });
+        setCookie(name, value, { expires: new Date(Date.now() + 30 * 60 * 1000) });
     },
     removeItem: (name: string) => {
         removeCookie(name);

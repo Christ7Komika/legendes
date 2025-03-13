@@ -3,17 +3,33 @@ import { AlbumCartType } from "../types/album";
 import { cookieStorage, createJSONStorage, createSelectors, persist } from "./store";
 
 type AlbumProps = {
-    albums: AlbumCartType[]
+    state: "load" | "success",
+    albums: AlbumCartType[],
+    username: string;
+    email: string;
+    setState: (state: "load" | "success") => void;
+    setUserInfos: (username: string, email?: string) => void;
     addAlbum: (newAlbum: AlbumCartType) => void;
     removeAlbum: (id: number) => void;
-    editQuantity: (id: number, quantity: number) => void;
     clear: () => void;
 }
 
 const useAlbums = createSelectors(create<AlbumProps>()(
     persist(
         (set) => ({
+            state: "load",
+            username: "",
+            email: "",
             albums: [],
+            setState(state) {
+                set({ state })
+            },
+            setUserInfos(username, email) {
+                set({
+                    username: username,
+                    email: email ?? ""
+                })
+            },
             addAlbum(newAlbum) {
                 const oldAlbums = useAlbums.getState().albums;
                 const isExist = oldAlbums.find(e => e.id === newAlbum.id);
@@ -24,12 +40,6 @@ const useAlbums = createSelectors(create<AlbumProps>()(
                 const albumsFilter = Array.isArray(oldAlbums) ? [...oldAlbums] : [];
                 const albums = (albumsFilter.length > 0 ? [...albumsFilter.filter(album => album.id !== newAlbum.id), newAlbum] : [newAlbum])
                 set({ albums })
-            },
-            editQuantity(id, quantity) {
-                const albums = useAlbums.getState().albums;
-                const currentAlbum = albums.find(v => v.id === id)
-                if (!currentAlbum) return
-                set({ albums: [...(albums.filter(v => v.id !== id)), { ...currentAlbum, quantity }] })
             },
             removeAlbum(id) {
                 const oldAlbums = useAlbums.getState().albums;

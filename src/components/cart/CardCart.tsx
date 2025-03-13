@@ -42,11 +42,8 @@ export default function CardCart({
       <div className="-space-y-0.5">
         <h2>{album.title}</h2>
         <p className="text-neutral-500 text-sm">
-          <span>{formatPrice(album.quantity)}</span> x{" "}
-          <span>{getPrice(album.price)} FCFA</span> ={" "}
-          <span>
-            {formatPrice(getPrice(album.price) * album.quantity)} FCFA
-          </span>
+          <span>1</span> x <span>{getPrice(album.price)} FCFA</span> ={" "}
+          <span>{formatPrice(getPrice(album.price) * 1)} FCFA</span>
         </p>
       </div>
     </div>

@@ -7,6 +7,9 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import Buy from "./pages/Buy";
 import Cart from "./pages/Cart";
+import CompletedPayment from "./pages/CompletedPayment";
+import FailedPayment from "./pages/FailedPayment";
+import Contact from "./pages/Contact";
 
 const rootEl = document.getElementById("root");
 if (rootEl) {
@@ -16,8 +19,11 @@ if (rootEl) {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/buy" element={<Buy />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/boutique" element={<Buy />} />
+          <Route path="/panier" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/telecharger" element={<CompletedPayment />} />
+          <Route path="/payement-echoue" element={<FailedPayment />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

@@ -8,13 +8,20 @@ import Project from "../components/Project";
 import UpTo from "../components/UpTo";
 import Song from "../../public/media/song.mp3";
 import useAudio from "../hooks/useAudio";
+import Init from "../components/Init";
+import Sales from "../components/Sales";
+import { useRef } from "react";
 
 export default function Home() {
   const { waveRef, isPlaying, handlePlayPause, handlePrev, handleNext } =
     useAudio({ audioUrl: Song });
+
+  const footerRef = useRef<HTMLDivElement>(null);
   return (
     <div className="relative">
       <title>LEGENDES | Accueil</title>
+      <Sales />
+      <Init />
       <UpTo />
       <Player
         waveRef={waveRef}
@@ -33,7 +40,7 @@ export default function Home() {
       <Album />
       <Project />
       <Platform />
-      <Footer />
+      <Footer footerRef={footerRef} />
     </div>
   );
 }

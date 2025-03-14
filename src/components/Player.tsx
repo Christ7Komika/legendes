@@ -18,6 +18,7 @@ export default function Player({
   handlePrev,
   title,
 }: PlayerProps) {
+  console.log({ isPlaying });
   return (
     <div className="bottom-0 left-0 z-30 fixed flex justify-center xss:justify-between items-center gap-x-8 bg-black p-3 w-full">
       <div className="hidden xss:flex gap-x-4 min-w-[280px]">

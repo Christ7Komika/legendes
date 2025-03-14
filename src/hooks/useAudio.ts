@@ -48,7 +48,7 @@ export default function useAudio({
         wavesurfer.on("ready", () => {
             setDuration(wavesurfer.getDuration());
             wavesurfer.play(); // 🚀 Auto-play après le chargement
-            setIsPlaying(true);
+            setIsPlaying(false);
         });
 
         wavesurfer.on("audioprocess", () => setCurrentTime(wavesurfer.getCurrentTime()));

@@ -86,7 +86,11 @@ export default function CompletedPayment() {
   }
 
   if (albums.length === 0) {
-    return <NotFound />;
+    return (
+      <div className="px-2">
+        <NotFound />
+      </div>
+    );
   }
 
   if (isPending)
@@ -101,7 +105,7 @@ export default function CompletedPayment() {
   return (
     <div className="flex flex-col h-dvh">
       <Navbar />
-      <div className="flex flex-col justify-center items-center gap-4 w-dvw h-full">
+      <div className="flex flex-col justify-center items-center gap-4 px-2 w-dvw h-full">
         <p className="bg-emerald-600/5 p-4 border border-emerald-600 rounded-xl max-w-md text-emerald-600 text-sm text-center">
           Votre paiement a été validé avec succès ! Vous pouvez maintenant
           télécharger votre contenu.

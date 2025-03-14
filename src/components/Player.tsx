@@ -2,6 +2,7 @@ import Stream from "../../public/assets/stream.webp";
 import { EndIcon, PauseIcon, PlayIcon, StartIcon } from "./icons/Icons";
 
 type PlayerProps = {
+  title: string;
   waveRef: React.RefObject<HTMLDivElement | null>;
   isPlaying: boolean;
   handlePlayPause: () => void;
@@ -15,6 +16,7 @@ export default function Player({
   handleNext,
   handlePlayPause,
   handlePrev,
+  title,
 }: PlayerProps) {
   return (
     <div className="bottom-0 left-0 z-30 fixed flex justify-center xss:justify-between items-center gap-x-8 bg-black p-3 w-full">
@@ -27,7 +29,7 @@ export default function Player({
           />
         </div>
         <div className="text-white">
-          <h2 className="font-medium text-2xl">Nani a kossi yo</h2>
+          <h2 className="font-medium text-xl">{title}</h2>
           <h3 className="uppercase tracking-widest">Legendes</h3>
         </div>
       </div>

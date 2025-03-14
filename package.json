@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "rsbuild build",
-    "dev": "rsbuild dev --open",
+    "dev": "rsbuild dev --port=5000 --open",
     "preview": "rsbuild preview"
   },
   "dependencies": {
@@ -19,6 +19,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.3.0",
+    "split-type": "^0.3.4",
     "typescript-cookie": "^1.0.6",
     "wavesurfer.js": "^7.9.1",
     "zustand": "^5.0.3"

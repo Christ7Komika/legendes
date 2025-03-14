@@ -2,7 +2,7 @@ import { NotFoundIcon } from "./icons/Icons";
 
 export default function NotFound() {
   return (
-    <div className="flex justify-center items-center w-dvw h-dvh">
+    <div className="flex justify-center items-center w-full h-dvh">
       <div className="space-y-3 bg-white mx-auto p-12 rounded-xl w-full max-w-[850px]">
         <span className="block mx-auto w-[150px]">
           <NotFoundIcon className="fill-neutral-500" />

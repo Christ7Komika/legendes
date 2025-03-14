@@ -6,15 +6,20 @@ import Platform from "../components/Platform";
 import Player from "../components/Player";
 import Project from "../components/Project";
 import UpTo from "../components/UpTo";
-import Song from "../../public/media/song.mp3";
 import useAudio from "../hooks/useAudio";
 import Init from "../components/Init";
 import Sales from "../components/Sales";
 import { useRef } from "react";
 
 export default function Home() {
-  const { waveRef, isPlaying, handlePlayPause, handlePrev, handleNext } =
-    useAudio({ audioUrl: Song });
+  const {
+    waveRef,
+    isPlaying,
+    handlePlayPause,
+    handlePrev,
+    handleNext,
+    currentTrack,
+  } = useAudio({});
 
   const footerRef = useRef<HTMLDivElement>(null);
   return (
@@ -24,6 +29,7 @@ export default function Home() {
       <Init />
       <UpTo />
       <Player
+        title={currentTrack.title}
         waveRef={waveRef}
         isPlaying={isPlaying}
         handleNext={handleNext}

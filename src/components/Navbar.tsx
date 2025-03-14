@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <nav
       className={clsx(
-        "top-0 left-0 z-20 fixed flex justify-between items-center px-8 md:px-16 w-dvw transition-all duration-500",
+        "top-0 left-0 z-40 fixed flex justify-between items-center px-8 md:px-16 w-dvw transition-all duration-500",
         scroll >= NAVBAR_SCROLL_CHANGE && "bg-white",
         width <= 768 && "bg-white"
       )}

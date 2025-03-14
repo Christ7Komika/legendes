@@ -1,45 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
+import { albums } from "../datas/albums";
 
 type AudioWaveProps = {
-    audioUrl: string;
     waveColor?: string;
     progressColor?: string;
     height?: number;
-    onNext?: () => void;
-    onPrev?: () => void;
 };
 
 export default function useAudio({
-    audioUrl,
     waveColor = "#aaa",
     progressColor = "#fff",
     height = 40,
-    onNext,
-    onPrev
 }: AudioWaveProps) {
     const waveRef = useRef<HTMLDivElement>(null);
     const wavesurferRef = useRef<WaveSurfer | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+
+    const currentTrack = albums[currentTrackIndex];
 
     useEffect(() => {
-        // Vérifier si le conteneur existe
         if (!waveRef.current) return;
 
-        // Nettoyer toute instance précédente
         if (wavesurferRef.current) {
             wavesurferRef.current.destroy();
             wavesurferRef.current = null;
         }
 
-        // Création de l'instance WaveSurfer
         const wavesurfer = WaveSurfer.create({
             container: waveRef.current,
-            waveColor: waveColor,
-            progressColor: progressColor,
-            height: height,
+            waveColor,
+            progressColor,
+            height,
             cursorWidth: 1,
             cursorColor: "#333",
             barWidth: 2,
@@ -47,39 +42,30 @@ export default function useAudio({
             barRadius: 2,
         });
 
-        // Assigner l'instance à la référence
         wavesurferRef.current = wavesurfer;
+        wavesurfer.load(currentTrack.song);
 
-        // Chargement du fichier audio
-        wavesurfer.load(audioUrl);
-
-        // Enregistrement des événements
         wavesurfer.on("ready", () => {
             setDuration(wavesurfer.getDuration());
+            wavesurfer.play(); // 🚀 Auto-play après le chargement
+            setIsPlaying(true);
         });
 
-        wavesurfer.on("audioprocess", () => {
-            setCurrentTime(wavesurfer.getCurrentTime());
-        });
-
+        wavesurfer.on("audioprocess", () => setCurrentTime(wavesurfer.getCurrentTime()));
         wavesurfer.on("play", () => setIsPlaying(true));
         wavesurfer.on("pause", () => setIsPlaying(false));
-        wavesurfer.on("finish", () => setIsPlaying(false));
+        wavesurfer.on("finish", handleNext);
 
-        // Nettoyage à la destruction du composant
         return () => {
             if (wavesurferRef.current) {
                 wavesurferRef.current.destroy();
                 wavesurferRef.current = null;
             }
         };
-    }, [audioUrl, waveColor, progressColor, height]);
+    }, [currentTrackIndex]); // 🎯 Se déclenche à chaque changement de piste
 
-    // Reste du code inchangé...
     function handlePlayPause() {
-        if (wavesurferRef.current) {
-            wavesurferRef.current.playPause();
-        }
+        wavesurferRef.current?.playPause();
     }
 
     function handleRestart() {
@@ -93,25 +79,11 @@ export default function useAudio({
     }
 
     function handleNext() {
-        if (wavesurferRef.current) {
-            if (isPlaying) {
-                wavesurferRef.current.pause();
-            }
-            if (onNext) {
-                onNext();
-            }
-        }
+        setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % albums.length);
     }
 
     function handlePrev() {
-        if (wavesurferRef.current) {
-            if (isPlaying) {
-                wavesurferRef.current.pause();
-            }
-            if (onPrev) {
-                onPrev();
-            }
-        }
+        setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + albums.length) % albums.length);
     }
 
     return {
@@ -119,9 +91,10 @@ export default function useAudio({
         duration,
         currentTime,
         isPlaying,
+        currentTrack,
         handlePlayPause,
         handleRestart,
         handleNext,
-        handlePrev
+        handlePrev,
     };
 }

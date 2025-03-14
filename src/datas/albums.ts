@@ -1,7 +1,7 @@
 import { AlbumCartType } from "../types/album";
 import Cover from "../../public/assets/stream.webp";
 import NANI_A_KOSSI_YO from "../../public/media/1- Intro Nani a kossi yo_Mixton x teddy benzo.mp3";
-import LVBN from "../../public/media/2-L .V.N. B Mixton x Teddy benzo.mp3";
+import LVBN from "../../public/media/2-L.V.N. B Mixton x Teddy benzo.mp3";
 import EBETA_KAKA from "../../public/media/3-E beba kaka X Ba2ry X Le Tchega.mp3";
 import PROBLEME from "../../public/media/4- problèmes Teddy benzo x Mixton.mp3";
 import RALENTI from "../../public/media/5- ralenti Mixton x Teddy benzo x Rodzeng.mp3";
@@ -16,7 +16,7 @@ import NA_KE from "../../public/media/13- Na Ke Mixton x Teddy benzo.mp3";
 
 export const albums: AlbumCartType[] = [
     { id: 1, cover: Cover, title: "Nani à Kossi Yo", price: "500.00 CFA", song: NANI_A_KOSSI_YO },
-    { id: 2, cover: Cover, title: "Les vieux la nous bloquent", price: "500.00 CFA", song: LVBN },
+    { id: 2, cover: Cover, title: "L.V.N.B", price: "500.00 CFA", song: LVBN },
     { id: 3, cover: Cover, title: "Ebeba Kaka", price: "500.00 CFA", song: EBETA_KAKA },
     { id: 4, cover: Cover, title: "Problème", price: "500.00 CFA", song: PROBLEME },
     { id: 5, cover: Cover, title: "Ralenti", price: "500.00 CFA", song: RALENTI },

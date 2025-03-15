@@ -41,13 +41,13 @@ export default function Sales() {
 
   // if (total === 0 && totalTitle.length === 0) return null;
   return (
-    <div className="top-1/2 z-30 fixed flex items-center gap-x-1 -translate-y-1/2">
-      <div
-        className="bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px] transition-all duration-300 ease-in-out"
-        style={{
-          left: show ? 0 : width,
-        }}
-      >
+    <div
+      className="top-1/2 z-30 fixed flex items-center gap-x-1 -translate-y-1/2"
+      style={{
+        left: show ? 0 : width,
+      }}
+    >
+      <div className="bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px] transition-all duration-300 ease-in-out">
         <h2 className="flex justify-between mb-2 p-2.5 border-neutral-500 border-b text-neutral-300 text-sm">
           Total ventes{" "}
           <span className="flex items-center bg-neutral-100/10 px-2 rounded-full h-6">

@@ -1,12 +1,14 @@
 import { create } from "zustand/react"
-import { AlbumCartType } from "../types/album";
+import { AlbumCartType, PlaylistKeyType, PlaylistType } from "../types/album";
 import { cookieStorage, createJSONStorage, createSelectors, persist } from "./store";
 
 type AlbumProps = {
+    playlist: PlaylistType;
     state: "load" | "success",
     albums: AlbumCartType[],
     username: string;
     email: string;
+    setPlaylist: (song: PlaylistKeyType) => void
     setState: (state: "load" | "success") => void;
     setUserInfos: (username: string, email?: string) => void;
     addAlbum: (newAlbum: AlbumCartType) => void;
@@ -17,10 +19,29 @@ type AlbumProps = {
 const useAlbums = createSelectors(create<AlbumProps>()(
     persist(
         (set) => ({
+            playlist: {
+                "Nani à Kossi Yo": false,
+                "Les vieux la nous bloquent": false,
+                "Ebeba Kaka": false,
+                "Problème": false,
+                "Ralenti": false,
+                "Tu ignores quoi": false,
+                "Ntaba na goût": false,
+                "Boniama": false,
+                "Moselebende": false,
+                "Na loba nini": false,
+                "Comment oublier": false,
+                "Rando Rando": false,
+                "Na ke": false,
+            },
             state: "load",
             username: "",
             email: "",
             albums: [],
+            setPlaylist(song) {
+                const playlist = useAlbums.getState().playlist;
+                set({ playlist: { ...playlist, [song]: true } })
+            },
             setState(state) {
                 set({ state })
             },

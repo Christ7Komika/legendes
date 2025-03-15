@@ -25,14 +25,30 @@ export function FacebookIcon({ color = "#fff", className }: IconProps) {
 
 export function SoundCloudIcon({ color = "#fff", className }: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 50 50"
-      width="30"
-      height="30"
-    >
+    <svg viewBox="0 0 50 50" width="30" height="30">
       <path
         d="M30 11C26.398438 11 23 12.789063 21 15.6875L21 36L42.5 36C46.601563 36 50 32.601563 50 28.5C50 24.398438 46.601563 21 42.5 21C42 21 41.5 21.085938 41 21.1875C40.5 15.488281 35.800781 11 30 11 Z M 17 16C16.300781 16 15.601563 16.085938 15 16.1875L15 36L17 36 Z M 18 16L18 36L20 36L20 16.5C19.398438 16.300781 18.699219 16.101563 18 16 Z M 14 16.5C13.300781 16.800781 12.601563 17.101563 12 17.5L12 36L14 36 Z M 11 18.3125C10.199219 19.011719 9.5 19.90625 9 20.90625L9 36L11 36 Z M 6.5 22C6.324219 22.011719 6.148438 22.042969 6 22.09375L6 35.90625C6.300781 36.007813 6.699219 36 7 36L8 36L8 22.09375C7.699219 21.992188 7.300781 22 7 22C6.851563 22 6.675781 21.988281 6.5 22 Z M 5 22.3125C4.300781 22.511719 3.601563 22.8125 3 23.3125L3 34.6875C3.601563 35.085938 4.300781 35.488281 5 35.6875 Z M 2 24.09375C0.800781 25.394531 0 27.101563 0 29C0 30.898438 0.800781 32.605469 2 33.90625Z"
+        fill={color}
+        className={className}
+      />
+    </svg>
+  );
+}
+export function CheckIcon({ color = "#fff", className }: IconProps) {
+  return (
+    <svg
+      style={{
+        width: "100%",
+        height: "auto",
+        maxWidth: "100%",
+      }}
+      preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 24 24"
+      width="480"
+      height="480"
+    >
+      <path
+        d="M12 1C5.9375 1 1 5.9375 1 12C1 18.0625 5.9375 23 12 23C18.0625 23 23 18.0625 23 12C23 5.9375 18.0625 1 12 1 Z M 12 3C16.980469 3 21 7.019531 21 12C21 16.980469 16.980469 21 12 21C7.019531 21 3 16.980469 3 12C3 7.019531 7.019531 3 12 3 Z M 17.40625 8.1875L11 14.5625L7.71875 11.28125L6.28125 12.71875L10.28125 16.71875L11 17.40625L11.71875 16.71875L18.8125 9.59375Z"
         fill={color}
         className={className}
       />
@@ -68,10 +84,10 @@ export function StartIcon({ color = "#fff", className }: IconProps) {
         height: "auto",
         maxWidth: "100%",
       }}
+      preserveAspectRatio="xMidYMid meet"
       viewBox="0 0 64 64"
       width="30"
       height="30"
-      preserveAspectRatio="xMidYMid meet"
     >
       <path
         d="M11 9L11 55L20 55L20 34.097656L49.789062 54.929688L53 53L53 11L49.789062 9.0703125L20 29.902344L20 9L11 9 z"
@@ -460,7 +476,6 @@ export function VisaCardIcon() {
 export function AirtelIcon() {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       xmlSpace="preserve"
       style={{
         width: "100%",
@@ -573,7 +588,6 @@ export function NotFoundIcon({ color = "#000", className }: IconProps) {
 export function WrongPaymentIcon({ color = "#000", className }: IconProps) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       width={800}
       height={800}
       className={className}

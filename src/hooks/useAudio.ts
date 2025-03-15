@@ -19,7 +19,8 @@ export default function useAudio({
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-    const [canPlay, setCanPlay] = useState(false); // 🚀 État pour détecter l'interaction
+    const [canPlay, setCanPlay] = useState(false);
+    const [isReady, setIsReady] = useState(false); // ✅ Suivi de l'état prêt
 
     const currentTrack = albums[currentTrackIndex];
 
@@ -30,6 +31,8 @@ export default function useAudio({
             wavesurferRef.current.destroy();
             wavesurferRef.current = null;
         }
+
+        setIsReady(false); // 🚀 Indique que la nouvelle musique n'est pas prête
 
         const wavesurfer = WaveSurfer.create({
             container: waveRef.current,
@@ -48,8 +51,9 @@ export default function useAudio({
 
         wavesurfer.on("ready", () => {
             setDuration(wavesurfer.getDuration());
+            setIsReady(true); // ✅ La musique est prête
             if (canPlay) {
-                wavesurfer.play(); // 🚀 Auto-play si l'utilisateur a déjà interagi
+                wavesurfer.play();
                 setIsPlaying(true);
             }
         });
@@ -65,9 +69,8 @@ export default function useAudio({
                 wavesurferRef.current = null;
             }
         };
-    }, [currentTrackIndex, canPlay]); // 🔥 Dépend aussi de `canPlay`
+    }, [currentTrackIndex, canPlay]);
 
-    // ✅ Capture l'interaction utilisateur et active la lecture
     function enablePlay() {
         setCanPlay(true);
         document.removeEventListener("click", enablePlay);
@@ -79,24 +82,28 @@ export default function useAudio({
     }, []);
 
     function handlePlayPause() {
-        wavesurferRef.current?.playPause();
+        if (isReady) { // ✅ Joue uniquement si la musique est prête
+            wavesurferRef.current?.playPause();
+        }
     }
 
     function handleRestart() {
         if (wavesurferRef.current) {
             wavesurferRef.current.seekTo(0);
             setCurrentTime(0);
-            if (!isPlaying) {
+            if (!isPlaying && isReady) { // ✅ Vérifie `isReady`
                 wavesurferRef.current.play();
             }
         }
     }
 
     function handleNext() {
+        if (!isReady) return; // ✅ Empêche le changement si la musique n'est pas prête
         setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % albums.length);
     }
 
     function handlePrev() {
+        if (!isReady) return; // ✅ Empêche le changement si la musique n'est pas prête
         setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + albums.length) % albums.length);
     }
 
@@ -105,6 +112,7 @@ export default function useAudio({
         duration,
         currentTime,
         isPlaying,
+        isReady, // ✅ Permet au composant d'afficher un indicateur de chargement si nécessaire
         currentTrack,
         handlePlayPause,
         handleRestart,

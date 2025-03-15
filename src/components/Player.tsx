@@ -1,5 +1,11 @@
 import Stream from "../../public/assets/stream.webp";
-import { EndIcon, PauseIcon, PlayIcon, StartIcon } from "./icons/Icons";
+import {
+  EndIcon,
+  LoaderIcon,
+  PauseIcon,
+  PlayIcon,
+  StartIcon,
+} from "./icons/Icons";
 
 type PlayerProps = {
   title: string;
@@ -8,6 +14,7 @@ type PlayerProps = {
   handlePlayPause: () => void;
   handlePrev: () => void;
   handleNext: () => void;
+  isReady: boolean;
 };
 
 export default function Player({
@@ -17,8 +24,8 @@ export default function Player({
   handlePlayPause,
   handlePrev,
   title,
+  isReady,
 }: PlayerProps) {
-  console.log({ isPlaying });
   return (
     <div className="bottom-0 left-0 z-30 fixed flex justify-center xss:justify-between items-center gap-x-8 bg-black p-3 w-full">
       <div className="hidden xss:flex gap-x-4 min-w-[280px]">
@@ -48,7 +55,13 @@ export default function Player({
           onClick={handlePlayPause}
           className="flex justify-center items-center p-0 w-14 h-14 cursor-pointer"
         >
-          {isPlaying ? <PauseIcon /> : <PlayIcon />}
+          {!isReady && (
+            <span className="flex justify-center items-center w-6 h-6 animate-spin duration-500 ease-in-out">
+              <LoaderIcon className="fill-white" />
+            </span>
+          )}
+          {isReady && isPlaying && <PauseIcon />}
+          {isReady && !isPlaying && <PlayIcon />}
         </button>
         <button
           onClick={handleNext}

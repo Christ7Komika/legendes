@@ -1,17 +1,25 @@
 import Stream from "../../public/assets/stream.webp";
-import { EndIcon, PauseIcon, PlayIcon, StartIcon } from "./icons/Icons";
+import {
+  EndIcon,
+  LoaderIcon,
+  PauseIcon,
+  PlayIcon,
+  StartIcon,
+} from "./icons/Icons";
 
 type PlayerProps = {
   handlePlayPause: () => void;
   handlePrev: () => void;
   handleNext: () => void;
   isPlaying: boolean;
+  isReady: boolean;
 };
 
 export default function Hero({
   handleNext,
   handlePlayPause,
   handlePrev,
+  isReady,
   isPlaying,
 }: PlayerProps) {
   return (
@@ -48,7 +56,13 @@ export default function Hero({
             onClick={handlePlayPause}
             className="flex justify-center items-center p-0 w-16 h-16 cursor-pointer"
           >
-            {isPlaying ? <PauseIcon color="#ccc" /> : <PlayIcon color="#ccc" />}
+            {!isReady && (
+              <span className="flex justify-center items-center w-8 h-8 animate-spin duration-500 ease-in-out">
+                <LoaderIcon className="fill-white" />
+              </span>
+            )}
+            {isReady && isPlaying && <PauseIcon color="#ccc" />}
+            {isReady && !isPlaying && <PlayIcon color="#ccc" />}
           </button>
           <button
             onClick={handleNext}

@@ -39,11 +39,11 @@ export default function Sales() {
 
   if (isPending) return null;
 
-  if (total === 0 && totalTitle.length === 0) return null;
+  // if (total === 0 && totalTitle.length === 0) return null;
   return (
-    <>
+    <div className="top-1/2 z-30 fixed flex items-center gap-x-1 -translate-y-1/2">
       <div
-        className="top-[35%] z-30 fixed bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px] transition-all -translate-y-1/2 duration-300 ease-in-out"
+        className="bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px] transition-all duration-300 ease-in-out"
         style={{
           left: show ? 0 : width,
         }}
@@ -75,15 +75,12 @@ export default function Sales() {
       </div>
       <div
         onClick={() => setShow(!show)}
-        style={{
-          left: show ? 165 : 10,
-        }}
-        className="top-[28%] z-30 fixed flex justify-center items-center bg-black/80 backdrop-blur-2xl rounded-full w-8 h-8 transition-all -translate-y-1/2 duration-300 ease-in-out cursor-pointer"
+        className="flex justify-center items-center bg-black/80 backdrop-blur-2xl rounded-full w-8 h-8 cursor-pointer"
       >
         <span className="flex justify-center items-center w-3 h-3 rotate-90">
           <UpIcon className="fill-neutral-200" />
         </span>
       </div>
-    </>
+    </div>
   );
 }

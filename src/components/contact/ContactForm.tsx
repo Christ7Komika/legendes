@@ -16,8 +16,17 @@ export default function ContactForm() {
               question, nous sommes à votre écoute. Écrivez-nous !
             </p>
           </div>
-          <InfoContactCard />
-          <InfoContactCard />
+          <InfoContactCard
+            job="MANAGEMENT"
+            email="mab@legendes.cg"
+            username="Mab"
+            telephone="+242 06 659 61 61"
+          />
+          <InfoContactCard
+            job="LEGENDES"
+            email="booking@legendes.cg"
+            telephone="+242 06 659 61 61"
+          />
         </div>
       </div>
     </div>

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import useArticle from "../stores/article";
 import { SERVER_HOST } from "../lib/constant";
 import useAlbums from "../stores/albums";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { CheckIcon, LoaderIcon } from "../components/icons/Icons";
 import NotFound from "../components/NotFound";

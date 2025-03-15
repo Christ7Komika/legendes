@@ -1,14 +1,26 @@
-export default function InfoContactCard() {
+type InfoContactCardProps = {
+  job: string;
+  username?: string;
+  email: string;
+  telephone: string;
+};
+
+export default function InfoContactCard({
+  job,
+  username,
+  email,
+  telephone,
+}: InfoContactCardProps) {
   return (
     <div className="space-y-1 bg-white/80 p-4 h-fit">
       <div className="-space-y-0.5">
         <h2 className="font-semibold text-neutral-800 text-3xl uppercase">
-          Management
+          {job}
         </h2>
-        <p className="text-neutral-700 text-2xl">Mab</p>
+        {username && <p className="text-neutral-700 text-2xl">{username}</p>}
       </div>
-      <p className="text-neutral-500 text-2xl">test@email.com</p>
-      <span className="text-neutral-900 text-xl">+242 06 919 9087</span>
+      <p className="text-neutral-500 text-2xl">{email}</p>
+      <span className="text-neutral-900 text-xl">{telephone}</span>
     </div>
   );
 }

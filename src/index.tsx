@@ -18,7 +18,7 @@ if (rootEl) {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/boutique" element={<Buy />} />
           <Route path="/panier" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />

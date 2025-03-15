@@ -3,7 +3,7 @@ import {
   FacebookIcon,
   MenuIcon,
   ShoppingCartIcon,
-  SoundCloudIcon,
+  YoutubeIcon,
   XIcon,
 } from "./icons/Icons";
 import Logo from "../../public/assets/logo.png";
@@ -80,9 +80,9 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/">
+          <a href="https://www.youtube.com/@albumlegendes" target="_blank">
             <span className="flex justify-center items-center h-6">
-              <SoundCloudIcon
+              <YoutubeIcon
                 className={clsx(
                   pathname === "/" &&
                     scroll >= NAVBAR_SCROLL_CHANGE &&
@@ -94,7 +94,7 @@ export default function Navbar() {
                 )}
               />
             </span>
-          </NavLink>
+          </a>
         </li>
         <li>
           {albums.length > 0 ? (
@@ -221,11 +221,11 @@ export default function Navbar() {
               <ShoppingCartIcon color="#000" />
             </span>
           )}
-          <NavLink to="/">
+          <a href="https://www.youtube.com/@albumlegendes" target="_blank">
             <span className="flex justify-center items-center w-4 h-4">
-              <SoundCloudIcon color="#000" />
+              <YoutubeIcon color="#000" />
             </span>
-          </NavLink>
+          </a>
           <NavLink to="/">
             <span className="flex justify-center items-center w-4 h-4">
               <FacebookIcon color="#000" />

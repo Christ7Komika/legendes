@@ -2,6 +2,7 @@ export type AlbumCartType = {
     id: number;
     cover: string;
     title: string;
+    artist?: string
     price: string;
     song: string;
 };

@@ -7,7 +7,6 @@ import { getPrices } from "../../lib/utils";
 import { SERVER_HOST } from "../../lib/constant";
 import axios from "axios";
 import useArticle from "../../stores/article";
-import { redirect } from "react-router";
 
 type PricingCardMobileProps = {
   albums: AlbumCartType[];
@@ -43,10 +42,9 @@ export default function PricingCardMobile({
     }
 
     const { id, url } = response.data;
-
     if (id && url) {
       setId(id);
-      redirect(url);
+      window.location.assign(url);
     }
     setIsPending(false);
   }

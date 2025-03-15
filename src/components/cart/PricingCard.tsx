@@ -6,7 +6,6 @@ import { AlbumCartType } from "../../types/album";
 import Button from "../ui/Button";
 import CardCart from "./CardCart";
 import { useState } from "react";
-import { redirect } from "react-router";
 
 type PricingCardProps = {
   albums: AlbumCartType[];
@@ -35,10 +34,9 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
     }
 
     const { id, url } = response.data;
-    console.log({ data: response.data });
     if (id && url) {
       setId(id);
-      redirect(url);
+      window.location.assign(url);
     }
     setIsPending(false);
   }

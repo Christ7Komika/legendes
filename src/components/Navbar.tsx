@@ -1,11 +1,5 @@
 import { NavLink, useLocation } from "react-router";
-import {
-  FacebookIcon,
-  MenuIcon,
-  ShoppingCartIcon,
-  YoutubeIcon,
-  XIcon,
-} from "./icons/Icons";
+import { MenuIcon, ShoppingCartIcon, YoutubeIcon, XIcon } from "./icons/Icons";
 import Logo from "../../public/assets/logo.png";
 import useScroll from "../hooks/useScroll";
 import clsx from "clsx";
@@ -62,23 +56,6 @@ export default function Navbar() {
         </li>
       </ul>
       <ul className="hidden md:flex items-center gap-x-6">
-        <li>
-          <NavLink to="/">
-            <span className="flex justify-center items-center w-6 h-6">
-              <FacebookIcon
-                className={clsx(
-                  pathname === "/" &&
-                    scroll >= NAVBAR_SCROLL_CHANGE &&
-                    "fill-black",
-                  pathname === "/" &&
-                    scroll < NAVBAR_SCROLL_CHANGE &&
-                    "fill-white",
-                  pathname !== "/" && "fill-black"
-                )}
-              />
-            </span>
-          </NavLink>
-        </li>
         <li>
           <a href="https://www.youtube.com/@albumlegendes" target="_blank">
             <span className="flex justify-center items-center h-6">
@@ -226,11 +203,6 @@ export default function Navbar() {
               <YoutubeIcon color="#000" />
             </span>
           </a>
-          <NavLink to="/">
-            <span className="flex justify-center items-center w-4 h-4">
-              <FacebookIcon color="#000" />
-            </span>
-          </NavLink>
         </li>
       </ul>
     </nav>

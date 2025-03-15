@@ -40,7 +40,13 @@ export default function Home() {
       />
       <Header />
       <Hero />
-      <Album />
+      <Album
+        isPlaying={isPlaying}
+        handleNext={handleNext}
+        handlePlayPause={handlePlayPause}
+        handlePrev={handlePrev}
+        isReady={isReady}
+      />
       <Project />
       <Platform />
       <Footer footerRef={footerRef} />

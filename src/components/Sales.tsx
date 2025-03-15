@@ -43,7 +43,7 @@ export default function Sales() {
   return (
     <>
       <div
-        className="top-1/2 z-30 fixed bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px] transition-all -translate-y-1/2 duration-300 ease-in-out"
+        className="top-[35%] z-30 fixed bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px] transition-all -translate-y-1/2 duration-300 ease-in-out"
         style={{
           left: show ? 0 : width,
         }}

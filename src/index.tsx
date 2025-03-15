@@ -10,6 +10,7 @@ import Cart from "./pages/Cart";
 import CompletedPayment from "./pages/CompletedPayment";
 import FailedPayment from "./pages/FailedPayment";
 import Contact from "./pages/Contact";
+import { Analytics } from "@vercel/analytics/react";
 
 const rootEl = document.getElementById("root");
 if (rootEl) {
@@ -26,6 +27,7 @@ if (rootEl) {
           <Route path="/payement-echoue" element={<FailedPayment />} />
         </Routes>
       </BrowserRouter>
+      <Analytics />
     </React.StrictMode>
   );
 }

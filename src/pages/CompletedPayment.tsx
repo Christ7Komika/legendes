@@ -43,7 +43,7 @@ export default function CompletedPayment() {
     if (downloadId) {
       setDownloadLoader(true);
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 180000);
+      const timeout = setTimeout(() => controller.abort(), 500000);
 
       try {
         const response = await fetch(`${SERVER_HOST}/get-songs`, {
@@ -109,6 +109,13 @@ export default function CompletedPayment() {
         <p className="bg-emerald-600/5 p-4 border border-emerald-600 rounded-xl max-w-md text-emerald-600 text-sm text-center">
           Votre paiement a été validé avec succès ! Vous pouvez maintenant
           télécharger votre contenu.
+        </p>
+        <p className="bg-blue-600/5 p-4 border border-blue-600 rounded-xl max-w-md text-blue-600 text-sm text-center">
+          Veuillez noter : Une fois que vous avez cliqué sur le bouton de
+          téléchargement, il se peut que cela prenne quelques instants. En
+          effet, les fichiers audio que vous avez achetés sont en cours de
+          compression pour garantir une expérience de téléchargement optimale.
+          Nous vous remercions pour votre patience pendant ce processus.
         </p>
         <button
           onClick={download}

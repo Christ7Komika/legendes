@@ -115,8 +115,11 @@ export default function CompletedPayment() {
           className="flex justify-center items-center bg-blue-700 hover:bg-blue-800 px-4 py-1 rounded-md w-[250px] h-10 text-white cursor-pointer"
         >
           {downloadLoader ? (
-            <span className="flex justify-center items-center w-5 h-5 animate-spin duration-500 ease-in-out">
-              <LoaderIcon className="fill-white" />
+            <span className="flex justify-center items-center gap-x-2">
+              <span className="flex justify-center items-center w-5 h-5 animate-spin duration-500 ease-in-out">
+                <LoaderIcon className="fill-white" />
+              </span>
+              Téléchargement...
             </span>
           ) : (
             "Télécharger maintenant"

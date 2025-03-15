@@ -6,12 +6,14 @@ type AudioWaveProps = {
     waveColor?: string;
     progressColor?: string;
     height?: number;
+    enableAutoPlayNext?: boolean; // ✅ Nouveau paramètre
 };
 
 export default function useAudio({
     waveColor = "#aaa",
     progressColor = "#fff",
     height = 40,
+    enableAutoPlayNext = true, // ✅ Valeur par défaut
 }: AudioWaveProps) {
     const waveRef = useRef<HTMLDivElement>(null);
     const wavesurferRef = useRef<WaveSurfer | null>(null);
@@ -20,7 +22,7 @@ export default function useAudio({
     const [currentTime, setCurrentTime] = useState(0);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [canPlay, setCanPlay] = useState(false);
-    const [isReady, setIsReady] = useState(false); // ✅ Suivi de l'état prêt
+    const [isReady, setIsReady] = useState(false);
 
     const currentTrack = albums[currentTrackIndex];
 
@@ -32,7 +34,7 @@ export default function useAudio({
             wavesurferRef.current = null;
         }
 
-        setIsReady(false); // 🚀 Indique que la nouvelle musique n'est pas prête
+        setIsReady(false);
 
         const wavesurfer = WaveSurfer.create({
             container: waveRef.current,
@@ -51,7 +53,7 @@ export default function useAudio({
 
         wavesurfer.on("ready", () => {
             setDuration(wavesurfer.getDuration());
-            setIsReady(true); // ✅ La musique est prête
+            setIsReady(true);
             if (canPlay) {
                 wavesurfer.play();
                 setIsPlaying(true);
@@ -61,7 +63,9 @@ export default function useAudio({
         wavesurfer.on("audioprocess", () => setCurrentTime(wavesurfer.getCurrentTime()));
         wavesurfer.on("play", () => setIsPlaying(true));
         wavesurfer.on("pause", () => setIsPlaying(false));
-        wavesurfer.on("finish", handleNext);
+        wavesurfer.on("finish", () => {
+            if (enableAutoPlayNext) handleNext(); // ✅ Utilisation du paramètre
+        });
 
         return () => {
             if (wavesurferRef.current) {
@@ -69,7 +73,7 @@ export default function useAudio({
                 wavesurferRef.current = null;
             }
         };
-    }, [currentTrackIndex, canPlay]);
+    }, [currentTrackIndex, canPlay, enableAutoPlayNext]);
 
     function enablePlay() {
         setCanPlay(true);
@@ -82,7 +86,7 @@ export default function useAudio({
     }, []);
 
     function handlePlayPause() {
-        if (isReady) { // ✅ Joue uniquement si la musique est prête
+        if (isReady) {
             wavesurferRef.current?.playPause();
         }
     }
@@ -91,20 +95,31 @@ export default function useAudio({
         if (wavesurferRef.current) {
             wavesurferRef.current.seekTo(0);
             setCurrentTime(0);
-            if (!isPlaying && isReady) { // ✅ Vérifie `isReady`
+            if (!isPlaying && isReady) {
                 wavesurferRef.current.play();
             }
         }
     }
 
     function handleNext() {
-        if (!isReady) return; // ✅ Empêche le changement si la musique n'est pas prête
+        if (!isReady) return;
         setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % albums.length);
     }
 
     function handlePrev() {
-        if (!isReady) return; // ✅ Empêche le changement si la musique n'est pas prête
+        if (!isReady) return;
         setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + albums.length) % albums.length);
+    }
+
+    function playTrack(index: number) {
+        if (index === currentTrackIndex) {
+            handlePlayPause();
+        } else {
+            if (isPlaying) {
+                wavesurferRef.current?.pause();
+            }
+            setCurrentTrackIndex(index);
+        }
     }
 
     return {
@@ -112,11 +127,12 @@ export default function useAudio({
         duration,
         currentTime,
         isPlaying,
-        isReady, // ✅ Permet au composant d'afficher un indicateur de chargement si nécessaire
+        isReady,
         currentTrack,
         handlePlayPause,
         handleRestart,
         handleNext,
         handlePrev,
+        playTrack,
     };
 }

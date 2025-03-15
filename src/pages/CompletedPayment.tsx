@@ -52,7 +52,8 @@ export default function CompletedPayment() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ id, downloadId }),
-          mode: "no-cors",
+          credentials: "include",
+          mode: "cors",
           signal: controller.signal,
         });
 

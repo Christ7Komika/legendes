@@ -20,6 +20,7 @@ export default function Home() {
     handleNext,
     currentTrack,
     isReady,
+    playTrack,
   } = useAudio({});
 
   const footerRef = useRef<HTMLDivElement>(null);
@@ -46,6 +47,8 @@ export default function Home() {
         handlePlayPause={handlePlayPause}
         handlePrev={handlePrev}
         isReady={isReady}
+        currentTrack={currentTrack}
+        playTrack={playTrack}
       />
       <Project />
       <Platform />

@@ -1,3 +1,7 @@
+import { albums } from "../datas/albums";
+import { AlbumCartType } from "../types/album";
+import TrackCard from "./card/TrackCard";
+import TrackList from "./card/TrackList";
 import {
   EndIcon,
   LoaderIcon,
@@ -12,6 +16,8 @@ type AlbumProps = {
   handleNext: () => void;
   isPlaying: boolean;
   isReady: boolean;
+  currentTrack: AlbumCartType;
+  playTrack: (index: number) => void;
 };
 
 export default function Album({
@@ -20,6 +26,8 @@ export default function Album({
   handlePrev,
   isPlaying,
   isReady,
+  currentTrack,
+  playTrack,
 }: AlbumProps) {
   return (
     <div className="bg-zinc-100 px-2 py-[80px]">
@@ -30,39 +38,43 @@ export default function Album({
         <span className="block bg-black mx-auto mt-4 w-[60px] h-[1px]" />
       </div>
       <div className="space-y-1">
-        <p className="text-lg text-center">L’ALBUM LEGENDES</p>
-        <p className="text-center">
-          sera bientôt disponible dans son intégralité
-        </p>
-        <p className="text-center">
-          Restez à l’écoute pour sa sortie imminente
-        </p>
+        <p className="text-lg text-center uppercase">Découvrez la track list</p>
+        <p className="text-center">La playlist est enfin disponible !</p>
+      </div>
+
+      <div className="py-6">
+        <TrackList
+          playTrack={playTrack}
+          isPlaying={isPlaying}
+          isReady={isReady}
+          currentTrack={currentTrack}
+        />
       </div>
       <div className="flex justify-center">
-        <div className="flex items-center gap-x-3 pt-6">
+        <div className="flex justify-center items-center gap-x-3 bg-neutral-50 rounded-full w-[200px] h-14">
           <button
             onClick={handlePrev}
-            className="flex justify-center items-center p-0 w-7 h-7 cursor-pointer"
+            className="flex justify-center items-center w-5 h-5 cursor-pointer"
           >
-            <StartIcon className="fill-neutral-800" />
+            <StartIcon className="fill-neutral-600" />
           </button>
           <button
             onClick={handlePlayPause}
-            className="flex justify-center items-center p-0 w-16 h-16 cursor-pointer"
+            className="flex justify-center items-center w-9 h-9 cursor-pointer"
           >
             {!isReady && (
-              <span className="flex justify-center items-center w-8 h-8 animate-spin duration-500 ease-in-out">
-                <LoaderIcon className="fill-neutral-800" />
+              <span className="flex justify-center items-center w-6 h-6 animate-spin duration-500 ease-in-out">
+                <LoaderIcon className="fill-neutral-600" />
               </span>
             )}
-            {isReady && isPlaying && <PauseIcon className="fill-neutral-800" />}
-            {isReady && !isPlaying && <PlayIcon className="fill-neutral-800" />}
+            {isReady && isPlaying && <PauseIcon className="fill-neutral-600" />}
+            {isReady && !isPlaying && <PlayIcon className="fill-neutral-600" />}
           </button>
           <button
             onClick={handleNext}
-            className="flex justify-center items-center w-7 h-7 cursor-pointer"
+            className="flex justify-center items-center w-5 h-5 cursor-pointer"
           >
-            <EndIcon className="fill-neutral-800" />
+            <EndIcon className="fill-neutral-600" />
           </button>
         </div>
       </div>

@@ -98,11 +98,14 @@ export default function CompletedPayment() {
 
   if (isPending)
     return (
-      <div className="flex justify-center items-center w-dvw h-dvh">
-        <span className="flex justify-center items-center w-6 h-6 animate-spin duration-500 ease-in-out">
-          <LoaderIcon />
-        </span>
-      </div>
+      <>
+        <title>LEGENDES | Télécharger</title>
+        <div className="flex justify-center items-center w-dvw h-dvh">
+          <span className="flex justify-center items-center w-6 h-6 animate-spin duration-500 ease-in-out">
+            <LoaderIcon />
+          </span>
+        </div>
+      </>
     );
 
   return (

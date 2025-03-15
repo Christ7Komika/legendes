@@ -7,7 +7,7 @@ import ContactForm from "../components/contact/ContactForm";
 export default function Contact() {
   return (
     <>
-      <title>LEGENDES | Boutique</title>
+      <title>LEGENDES | Contact</title>
       <Init />
       <Navbar />
       <Hero />

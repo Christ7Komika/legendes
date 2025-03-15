@@ -53,13 +53,21 @@ export default function Album({
       <div className="flex justify-center">
         <div className="flex justify-center items-center gap-x-3 bg-neutral-50 rounded-full w-[200px] h-14">
           <button
-            onClick={handlePrev}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              handlePrev();
+            }}
             className="flex justify-center items-center w-5 h-5 cursor-pointer"
           >
             <StartIcon className="fill-neutral-600" />
           </button>
           <button
-            onClick={handlePlayPause}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              handlePlayPause();
+            }}
             className="flex justify-center items-center w-9 h-9 cursor-pointer"
           >
             {!isReady && (
@@ -71,7 +79,11 @@ export default function Album({
             {isReady && !isPlaying && <PlayIcon className="fill-neutral-600" />}
           </button>
           <button
-            onClick={handleNext}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              handleNext();
+            }}
             className="flex justify-center items-center w-5 h-5 cursor-pointer"
           >
             <EndIcon className="fill-neutral-600" />

@@ -46,13 +46,21 @@ export default function Player({
       </div>
       <div className="flex items-center gap-x-2">
         <button
-          onClick={handlePrev}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            handlePrev();
+          }}
           className="flex justify-center items-center p-0 w-6 h-6 cursor-pointer"
         >
           <StartIcon />
         </button>
         <button
-          onClick={handlePlayPause}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            handlePlayPause();
+          }}
           className="flex justify-center items-center p-0 w-14 h-14 cursor-pointer"
         >
           {!isReady && (
@@ -64,7 +72,11 @@ export default function Player({
           {isReady && !isPlaying && <PlayIcon />}
         </button>
         <button
-          onClick={handleNext}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            handleNext();
+          }}
           className="flex justify-center items-center w-6 h-6 cursor-pointer"
         >
           <EndIcon />

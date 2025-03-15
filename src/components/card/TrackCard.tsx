@@ -41,14 +41,10 @@ export default function TrackCard({
           </span>
         </div>
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            playTrack(data.id - 1);
-          }}
-          className="text-sm leading-tight"
+          onClick={() => playTrack(data.id - 1)}
+          className="text-sm leading-tight cursor-pointer"
         >
-          <span className="flex justify-center items-center w-5 h-5 cursor-pointer">
+          <span className="flex justify-center items-center w-5 h-5">
             {!isReady && currentTrack.id === data.id && (
               <span className="flex animate-spin duration-500 ease-in-out">
                 <LoaderIcon className="fill-neutral-600" />

@@ -1,6 +1,4 @@
-import { albums } from "../datas/albums";
 import { AlbumCartType } from "../types/album";
-import TrackCard from "./card/TrackCard";
 import TrackList from "./card/TrackList";
 import {
   EndIcon,
@@ -53,21 +51,13 @@ export default function Album({
       <div className="flex justify-center">
         <div className="flex justify-center items-center gap-x-3 bg-neutral-50 rounded-full w-[200px] h-14">
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              handlePrev();
-            }}
+            onClick={handlePrev}
             className="flex justify-center items-center w-5 h-5 cursor-pointer"
           >
             <StartIcon className="fill-neutral-600" />
           </button>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              handlePlayPause();
-            }}
+            onClick={handlePlayPause}
             className="flex justify-center items-center w-9 h-9 cursor-pointer"
           >
             {!isReady && (
@@ -79,11 +69,7 @@ export default function Album({
             {isReady && !isPlaying && <PlayIcon className="fill-neutral-600" />}
           </button>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              handleNext();
-            }}
+            onClick={handleNext}
             className="flex justify-center items-center w-5 h-5 cursor-pointer"
           >
             <EndIcon className="fill-neutral-600" />

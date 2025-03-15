@@ -1,9 +1,9 @@
 import Logo from "../../public/assets/big-logo.webp";
-import Album from "../../public/assets/project.webp";
+import Album from "../../public/assets/project.jpg";
 
 export default function Project() {
   return (
-    <div className="bg-[#131112] px-2 pt-[170px] pb-15 text-white">
+    <div className="bg-[#131112] px-2 pt-[170px] pb-32 text-white">
       <div className="space-y-12 mb-8">
         <h2 className="mx-auto font-bold text-4xl md:text-5xl text-center tracking-widest">
           LE PROJET LEGENDES
@@ -43,11 +43,11 @@ export default function Project() {
           className="mx-auto w-full object-center object-contain"
         />
       </div>
-      <div className="mx-auto w-full max-w-[1150px]">
+      <div className="shadow-2xl shadow-neutral-800 mx-auto w-full max-w-[1150px]">
         <img
           src={Album}
           alt="Album"
-          className="mx-auto w-full object-center object-contain"
+          className="mx-auto rounded-xl w-full object-center object-contain overflow-hidden"
         />
       </div>
     </div>

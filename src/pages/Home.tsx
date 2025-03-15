@@ -39,13 +39,7 @@ export default function Home() {
         isReady={isReady}
       />
       <Header />
-      <Hero
-        isPlaying={isPlaying}
-        handleNext={handleNext}
-        handlePlayPause={handlePlayPause}
-        handlePrev={handlePrev}
-        isReady={isReady}
-      />
+      <Hero />
       <Album />
       <Project />
       <Platform />

@@ -1,27 +1,39 @@
+import { useState } from "react";
 import Stream from "../../public/assets/stream.webp";
-import {
-  EndIcon,
-  LoaderIcon,
-  PauseIcon,
-  PlayIcon,
-  StartIcon,
-} from "./icons/Icons";
+import useArticle from "../stores/article";
+import axios from "axios";
+import { SERVER_HOST } from "../lib/constant";
+import { albums } from "../datas/albums";
+import { LoaderIcon } from "./icons/Icons";
 
-type PlayerProps = {
-  handlePlayPause: () => void;
-  handlePrev: () => void;
-  handleNext: () => void;
-  isPlaying: boolean;
-  isReady: boolean;
-};
+export default function Hero() {
+  const setId = useArticle.use.setId();
+  const [isPending, setIsPending] = useState(false);
 
-export default function Hero({
-  handleNext,
-  handlePlayPause,
-  handlePrev,
-  isReady,
-  isPlaying,
-}: PlayerProps) {
+  async function handleStripe(e: React.SyntheticEvent) {
+    setIsPending(true);
+    e.preventDefault();
+    e.stopPropagation();
+
+    const response = await axios({
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      url: `${SERVER_HOST}/create-checkout-session`,
+      data: { playlist: albums },
+      timeout: 30000,
+    });
+
+    if (response.status !== 200) {
+      setIsPending(false);
+    }
+
+    const { id, url } = response.data;
+    if (id && url) {
+      setId(id);
+      window.location.assign(url);
+    }
+    setIsPending(false);
+  }
   return (
     <div className="relative">
       <div className="top-1/2 left-1/2 absolute flex justify-center items-center p-2 w-full h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -34,41 +46,34 @@ export default function Hero({
       </div>
       <div className="bg-zinc-100 h-[510px]">
         <div className="flex flex-col justify-center space-y-4 mx-auto px-2 pt-20 max-w-[750px]">
-          <h2 className="mx-auto font-bold text-3xl text-center tracking-widest">
-            NANI A KOSSI YO
+          <h2 className="mx-auto font-bold text-3xl md:text-5xl text-center uppercase tracking-widest">
+            Album Légendes
           </h2>
           <span className="block bg-black mx-auto mt-4 w-[60px] h-[1px]"></span>
           <div className="space-y-1">
-            <h3 className="font-bold text-center">NANI A KOSSI YO</h3>
-            <p className="text-center">Disponible en achat et streaming</p>
+            <h3 className="font-bold text-lg md:text-2xl text-center uppercase">
+              Teddy Benzo & Mixton
+            </h3>
+            <p className="text-center">Acheter maintenant</p>
           </div>
         </div>
       </div>
       <div className="flex justify-center items-center bg-[#131112] h-[510px]">
-        <div className="flex items-center gap-x-3 pt-28">
+        <div className="space-y-6 pt-20">
+          <h2 className="font-light text-neutral-100 text-lg text-center uppercase">
+            Acheter l'album complet à 5000 FCFA
+          </h2>
           <button
-            onClick={handlePrev}
-            className="flex justify-center items-center p-0 w-7 h-7 cursor-pointer"
+            onClick={handleStripe}
+            className="flex justify-center items-center bg-neutral-200 mx-auto rounded-md w-[150px] h-11 text-[#131112] cursor-pointer"
           >
-            <StartIcon color="#ccc" />
-          </button>
-          <button
-            onClick={handlePlayPause}
-            className="flex justify-center items-center p-0 w-16 h-16 cursor-pointer"
-          >
-            {!isReady && (
-              <span className="flex justify-center items-center w-8 h-8 animate-spin duration-500 ease-in-out">
-                <LoaderIcon className="fill-white" />
+            {isPending ? (
+              <span className="flex justify-center items-center w-5 h-5 animate-spin duration-500 ease-in-out">
+                <LoaderIcon className="fill-[#131112]" />
               </span>
+            ) : (
+              "Acheter"
             )}
-            {isReady && isPlaying && <PauseIcon color="#ccc" />}
-            {isReady && !isPlaying && <PlayIcon color="#ccc" />}
-          </button>
-          <button
-            onClick={handleNext}
-            className="flex justify-center items-center w-7 h-7 cursor-pointer"
-          >
-            <EndIcon color="#ccc" />
           </button>
         </div>
       </div>

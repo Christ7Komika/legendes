@@ -19,6 +19,7 @@ export default function PricingCardMobile({
 }: PricingCardMobileProps) {
   const [open, setOpen] = useState(false);
   const setId = useArticle.use.setId();
+  const [isPending, setIsPending] = useState(false);
 
   function handleOpen() {
     setOpen(!open);
@@ -27,18 +28,25 @@ export default function PricingCardMobile({
   async function handleStripe(e: React.SyntheticEvent) {
     e.preventDefault();
     e.stopPropagation();
+    setIsPending(true);
     const response = await axios({
-      method: "post",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       url: `${SERVER_HOST}/create-checkout-session`,
       data: { playlist: albums },
       timeout: 30000,
     });
+
+    if (response.status !== 200) {
+      setIsPending(false);
+    }
 
     const { id, url } = response.data;
     if (id && url) {
       setId(id);
       window.location = url;
     }
+    setIsPending(false);
   }
 
   return (
@@ -80,9 +88,7 @@ export default function PricingCardMobile({
         </button>
       </div>
       <div className="gap-x-2 gap-y-2 sm:gap-x-3 grid grid-cols-1 xss:grid-cols-[1.8fr_1fr_1fr] px-2 sm:px-8">
-        <Button type="stripe" onClick={handleStripe} />
-        {/* <Button type="mtn" />
-        <Button type="airtel" /> */}
+        <Button type="stripe" onClick={handleStripe} isPending={isPending} />
       </div>
     </div>
   );

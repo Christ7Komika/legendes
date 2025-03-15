@@ -5,6 +5,7 @@ import useArticle from "../../stores/article";
 import { AlbumCartType } from "../../types/album";
 import Button from "../ui/Button";
 import CardCart from "./CardCart";
+import { useState } from "react";
 
 type PricingCardProps = {
   albums: AlbumCartType[];
@@ -13,22 +14,31 @@ type PricingCardProps = {
 
 export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
   const setId = useArticle.use.setId();
+  const [isPending, setIsPending] = useState(false);
 
   async function handleStripe(e: React.SyntheticEvent) {
+    setIsPending(true);
     e.preventDefault();
     e.stopPropagation();
+
     const response = await axios({
-      method: "post",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       url: `${SERVER_HOST}/create-checkout-session`,
       data: { playlist: albums },
       timeout: 30000,
     });
+
+    if (response.status !== 200) {
+      setIsPending(false);
+    }
 
     const { id, url } = response.data;
     if (id && url) {
       setId(id);
       window.location = url;
     }
+    setIsPending(false);
   }
 
   return (
@@ -61,9 +71,7 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
         </p>
 
         <div className="gap-y-2 grid grid-cols-1 pt-2">
-          <Button type="stripe" onClick={handleStripe} />
-          {/* <Button type="mtn" />
-          <Button type="airtel" /> */}
+          <Button type="stripe" onClick={handleStripe} isPending={isPending} />
         </div>
       </div>
     </div>

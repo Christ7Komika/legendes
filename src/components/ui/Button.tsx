@@ -1,14 +1,19 @@
 import clsx from "clsx";
-import { MTNIcon, VisaCardIcon } from "../icons/Icons";
+import { LoaderIcon, MTNIcon, VisaCardIcon } from "../icons/Icons";
 import { AirtelIcon } from "../icons/Icons";
 import React from "react";
 
 type ButtonProps = {
   type?: "stripe" | "mtn" | "airtel";
   onClick?: (e: React.SyntheticEvent) => void;
+  isPending?: boolean;
 };
 
-export default function Button({ onClick, type = "stripe" }: ButtonProps) {
+export default function Button({
+  onClick,
+  type = "stripe",
+  isPending,
+}: ButtonProps) {
   function handleClick(e: React.SyntheticEvent) {
     if (onClick) {
       onClick(e);
@@ -24,20 +29,28 @@ export default function Button({ onClick, type = "stripe" }: ButtonProps) {
         type === "airtel" && "bg-[#e90000]"
       )}
     >
-      {type === "stripe" && (
-        <span className="w-16">
-          <VisaCardIcon />
+      {isPending ? (
+        <span className="flex justify-center items-center w-4 h-4 animate-spin duration-500 ease-in-out">
+          <LoaderIcon className="fill-white" />
         </span>
-      )}
-      {type === "mtn" && (
-        <span className="w-24">
-          <MTNIcon />
-        </span>
-      )}
-      {type === "airtel" && (
-        <span className="w-16">
-          <AirtelIcon />
-        </span>
+      ) : (
+        <>
+          {type === "stripe" && (
+            <span className="w-16">
+              <VisaCardIcon />
+            </span>
+          )}
+          {type === "mtn" && (
+            <span className="w-24">
+              <MTNIcon />
+            </span>
+          )}
+          {type === "airtel" && (
+            <span className="w-16">
+              <AirtelIcon />
+            </span>
+          )}
+        </>
       )}
     </button>
   );

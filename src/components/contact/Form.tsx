@@ -91,6 +91,7 @@ export default function Form() {
       setIsPending(true);
       const response = await axios({
         method: "post",
+        headers: { "Content-Type": "application/json" },
         url: `${SERVER_HOST}/send-email`,
         data: { form },
         timeout: 30000,

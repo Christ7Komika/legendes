@@ -24,7 +24,7 @@ export default function CartList() {
             </p>
           </div>
           <a
-            href="/buy"
+            href="/boutique"
             className="block bg-black mx-auto px-4 py-1 rounded-lg w-fit text-white text-sm text-center"
           >
             Continuer vos achats

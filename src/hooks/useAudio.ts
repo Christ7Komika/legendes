@@ -19,6 +19,7 @@ export default function useAudio({
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+    const [canPlay, setCanPlay] = useState(false); // 🚀 État pour détecter l'interaction
 
     const currentTrack = albums[currentTrackIndex];
 
@@ -47,8 +48,10 @@ export default function useAudio({
 
         wavesurfer.on("ready", () => {
             setDuration(wavesurfer.getDuration());
-            wavesurfer.play(); // 🚀 Auto-play après le chargement
-            setIsPlaying(false);
+            if (canPlay) {
+                wavesurfer.play(); // 🚀 Auto-play si l'utilisateur a déjà interagi
+                setIsPlaying(true);
+            }
         });
 
         wavesurfer.on("audioprocess", () => setCurrentTime(wavesurfer.getCurrentTime()));
@@ -62,7 +65,18 @@ export default function useAudio({
                 wavesurferRef.current = null;
             }
         };
-    }, [currentTrackIndex]); // 🎯 Se déclenche à chaque changement de piste
+    }, [currentTrackIndex, canPlay]); // 🔥 Dépend aussi de `canPlay`
+
+    // ✅ Capture l'interaction utilisateur et active la lecture
+    function enablePlay() {
+        setCanPlay(true);
+        document.removeEventListener("click", enablePlay);
+    }
+
+    useEffect(() => {
+        document.addEventListener("click", enablePlay);
+        return () => document.removeEventListener("click", enablePlay);
+    }, []);
 
     function handlePlayPause() {
         wavesurferRef.current?.playPause();

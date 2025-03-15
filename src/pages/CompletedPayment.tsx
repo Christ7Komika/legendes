@@ -110,13 +110,7 @@ export default function CompletedPayment() {
           Votre paiement a été validé avec succès ! Vous pouvez maintenant
           télécharger votre contenu.
         </p>
-        <p className="bg-blue-600/5 p-4 border border-blue-600 rounded-xl max-w-md text-blue-600 text-sm text-center">
-          Veuillez noter : Une fois que vous avez cliqué sur le bouton de
-          téléchargement, il se peut que cela prenne quelques instants. En
-          effet, les fichiers audio que vous avez achetés sont en cours de
-          compression pour garantir une expérience de téléchargement optimale.
-          Nous vous remercions pour votre patience pendant ce processus.
-        </p>
+
         <button
           onClick={download}
           className="flex justify-center items-center bg-blue-700 hover:bg-blue-800 px-4 py-1 rounded-md w-[250px] h-10 text-white cursor-pointer"
@@ -135,6 +129,13 @@ export default function CompletedPayment() {
         <a href="/" className="text-neutral-600 text-sm underline">
           Retourner à la page d'acceuill
         </a>
+        <p className="bg-blue-600/5 p-4 border border-blue-600 rounded-xl max-w-md text-blue-600 text-sm text-center">
+          Veuillez noter : Une fois que vous avez cliqué sur le bouton de
+          téléchargement, il se peut que cela prenne quelques instants. En
+          effet, les fichiers audio que vous avez achetés sont en cours de
+          compression pour garantir une expérience de téléchargement optimale.
+          Nous vous remercions pour votre patience pendant ce processus.
+        </p>
       </div>
       <Footer />
     </div>

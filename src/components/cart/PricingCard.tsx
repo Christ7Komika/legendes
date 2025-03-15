@@ -35,6 +35,7 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
     }
 
     const { id, url } = response.data;
+    console.log({ data: response.data });
     if (id && url) {
       setId(id);
       redirect(url);

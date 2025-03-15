@@ -43,6 +43,7 @@ export default function PricingCardMobile({
     }
 
     const { id, url } = response.data;
+
     if (id && url) {
       setId(id);
       redirect(url);

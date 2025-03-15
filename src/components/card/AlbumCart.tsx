@@ -1,17 +1,23 @@
 import useAlbums from "../../stores/albums";
 import { AlbumCartType } from "../../types/album";
 
-export default function AlbumCart({ id, cover, title, price }: AlbumCartType) {
+export default function AlbumCart({
+  id,
+  cover,
+  title,
+  price,
+  song,
+}: AlbumCartType) {
   const addAlbum = useAlbums.use.addAlbum();
   const album = useAlbums.use.albums();
 
   function handleAlbum() {
-    const album = { id, cover, title, price };
+    const album = { id, cover, title, price, song };
     addAlbum(album);
   }
 
   return (
-    <div className="space-y-6 w-full h-fit">
+    <div className="space-y-2 w-full h-fit">
       <div className="w-full max-w-full md:max-w-[550px] h-full max-h-fit md:max-h-[550px]">
         <img
           src={cover}
@@ -19,7 +25,7 @@ export default function AlbumCart({ id, cover, title, price }: AlbumCartType) {
           className="w-full h-full object-center object-cover"
         />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1">
         <h2 className="font-semibold text-lg text-center">{title}</h2>
         <p className="font-light text-neutral-400 text-4xl text-center">
           {price}

@@ -23,7 +23,7 @@ export default function Button({
     <button
       onClick={handleClick}
       className={clsx(
-        "flex justify-center items-center px-4 rounded-lg w-full h-12 cursor-pointer",
+        "flex justify-center items-center px-4 rounded-lg w-full h-14 cursor-pointer",
         type === "stripe" && "bg-[#363b38]",
         type === "mtn" && "bg-[#FFCC00]",
         type === "airtel" && "bg-[#e90000]"

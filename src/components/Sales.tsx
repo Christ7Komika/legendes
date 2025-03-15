@@ -35,7 +35,7 @@ export default function Sales() {
       <div className="bg-black/80 backdrop-blur-2xl rounded-tr-lg rounded-br-lg w-[200px]">
         {isPending ? (
           <div className="p-4 w-full">
-            <span className="flex justify-center items-center w-5 h-5">
+            <span className="flex justify-center items-center w-5 h-5 animate-spin ease-in-out">
               <LoaderIcon className="fill-white" />
             </span>
           </div>

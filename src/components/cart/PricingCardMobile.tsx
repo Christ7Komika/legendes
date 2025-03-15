@@ -87,7 +87,7 @@ export default function PricingCardMobile({
           )}
         </button>
       </div>
-      <div className="gap-x-2 gap-y-2 sm:gap-x-3 grid grid-cols-1 xss:grid-cols-[1.8fr_1fr_1fr] px-2 sm:px-8">
+      <div className="gap-x-2 gap-y-2 sm:gap-x-3 grid grid-cols-1 px-2 sm:px-8">
         <Button type="stripe" onClick={handleStripe} isPending={isPending} />
       </div>
     </div>

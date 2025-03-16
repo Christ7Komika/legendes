@@ -23,7 +23,7 @@ export default function AlbumCart({
   const album = useAlbums.use.albums();
   const { id, cover, title, price, song, artist } = data;
 
-  function handleAlbum(e: React.SyntheticEvent) {
+  function handleAlbum() {
     const album = { id, cover, title, price, song };
     addAlbum(album);
   }

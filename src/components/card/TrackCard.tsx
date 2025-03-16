@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { AlbumCartType } from "../../types/album";
 import { LoaderIcon, PauseIcon, PlayIcon } from "../icons/Icons";
 
@@ -25,7 +26,12 @@ export default function TrackCard({
       `}
     >
       <div className="items-center gap-x-1.5 grid grid-cols-[40px_1fr_20px]">
-        <div className="bg-amber-400 rounded-full w-[40px] h-[40px] overflow-hidden">
+        <div
+          className={clsx(
+            "bg-amber-400 rounded-full w-[40px] h-[40px] overflow-hidden duration-500 ease-linear",
+            isPlaying && data.id === currentTrack.id && "animate-spin"
+          )}
+        >
           <img
             src={data.cover}
             alt={data.title}

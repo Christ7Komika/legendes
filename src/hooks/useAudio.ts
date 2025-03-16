@@ -6,14 +6,14 @@ type AudioWaveProps = {
     waveColor?: string;
     progressColor?: string;
     height?: number;
-    enableAutoPlayNext?: boolean; // ✅ Nouveau paramètre
+    enableAutoPlayNext?: boolean;
 };
 
 export default function useAudio({
     waveColor = "#aaa",
     progressColor = "#fff",
     height = 40,
-    enableAutoPlayNext = true, // ✅ Valeur par défaut
+    enableAutoPlayNext = true,
 }: AudioWaveProps) {
     const waveRef = useRef<HTMLDivElement>(null);
     const wavesurferRef = useRef<WaveSurfer | null>(null);
@@ -64,7 +64,7 @@ export default function useAudio({
         wavesurfer.on("play", () => setIsPlaying(true));
         wavesurfer.on("pause", () => setIsPlaying(false));
         wavesurfer.on("finish", () => {
-            if (enableAutoPlayNext) handleNext(); // ✅ Utilisation du paramètre
+            if (enableAutoPlayNext) handleNext();
         });
 
         return () => {

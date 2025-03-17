@@ -98,7 +98,7 @@ export default function PaymentButton() {
             </li>
 
             <li
-              className="hover:bg-gray-100 p-2 rounded cursor-pointer"
+              className="flex justify-center hover:bg-gray-100 p-2 rounded cursor-pointer"
               onClick={handleMobileMoney}
             >
               📱 Mobile Money

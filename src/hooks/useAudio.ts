@@ -68,7 +68,6 @@ export default function useAudio({
         });
 
         return () => {
-
             if (wavesurferRef.current) {
                 wavesurferRef.current.destroy();
                 wavesurferRef.current = null;
@@ -77,24 +76,24 @@ export default function useAudio({
     }, [currentTrackIndex, canPlay, enableAutoPlayNext]);
 
     useEffect(() => {
-        document.addEventListener("click", enablePlay);
-        return () => document.removeEventListener("click", enablePlay);
-    }, []);
+        const enablePlay = (event: MouseEvent) => {
+            const target = event.target as HTMLElement;
+            if (target.closest(".audio-control")) {
+                setCanPlay(true);
+                // Déclencher la lecture de l'audio seulement quand il est prêt
+                if (isReady) {
+                    wavesurferRef.current?.play();
+                    setIsPlaying(true);
+                }
+                document.removeEventListener("click", enablePlay); // On retire l'écouteur une fois le clic effectué
+            }
+        };
 
-    function enablePlay(event: MouseEvent) {
-        // Vérifie si le clic provient d'un bouton spécifique lié à l'audio
-        const target = event.target as HTMLElement;
-        if (target.closest(".audio-control")) {
-            setCanPlay(true);
+        document.addEventListener("click", enablePlay);
+        return () => {
             document.removeEventListener("click", enablePlay);
-        }
-    }
-
-
-    useEffect(() => {
-        document.addEventListener("click", enablePlay);
-        return () => document.removeEventListener("click", enablePlay);
-    }, []);
+        };
+    }, [isReady]); // Ajouter isReady comme dépendance
 
     function handlePlayPause() {
         if (isReady) {

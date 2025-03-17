@@ -21,7 +21,6 @@ export default function useAudio({
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-    const [canPlay, setCanPlay] = useState(false);
     const [isReady, setIsReady] = useState(false);
 
     const currentTrack = albums[currentTrackIndex];
@@ -54,9 +53,8 @@ export default function useAudio({
         wavesurfer.on("ready", () => {
             setDuration(wavesurfer.getDuration());
             setIsReady(true);
-            if (canPlay) {
+            if (isPlaying) {
                 wavesurfer.play();
-                setIsPlaying(true);
             }
         });
 
@@ -73,31 +71,23 @@ export default function useAudio({
                 wavesurferRef.current = null;
             }
         };
-    }, [currentTrackIndex, canPlay, enableAutoPlayNext]);
+    }, [currentTrackIndex, isPlaying, enableAutoPlayNext]);
 
     useEffect(() => {
-        const enablePlay = (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
-            if (target.closest(".audio-control")) {
-                setCanPlay(true);
-                // Déclencher la lecture de l'audio seulement quand il est prêt
-                if (isReady) {
-                    wavesurferRef.current?.play();
-                    setIsPlaying(true);
-                }
-                document.removeEventListener("click", enablePlay); // On retire l'écouteur une fois le clic effectué
-            }
-        };
-
-        document.addEventListener("click", enablePlay);
-        return () => {
-            document.removeEventListener("click", enablePlay);
-        };
-    }, [isReady]); // Ajouter isReady comme dépendance
+        // Lancer la lecture de l'audio dès que l'utilisateur clique sur play
+        if (isReady && isPlaying) {
+            wavesurferRef.current?.play();
+        }
+    }, [isReady, isPlaying]); // Déclenche uniquement quand l'audio est prêt et que la lecture est demandée
 
     function handlePlayPause() {
         if (isReady) {
-            wavesurferRef.current?.playPause();
+            if (isPlaying) {
+                wavesurferRef.current?.pause();
+            } else {
+                wavesurferRef.current?.play();
+            }
+            setIsPlaying((prev) => !prev); // Inverser l'état de lecture
         }
     }
 
@@ -125,10 +115,8 @@ export default function useAudio({
         if (index === currentTrackIndex) {
             handlePlayPause();
         } else {
-            if (isPlaying) {
-                wavesurferRef.current?.pause();
-            }
             setCurrentTrackIndex(index);
+            setIsPlaying(true);
         }
     }
 

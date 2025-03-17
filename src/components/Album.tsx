@@ -28,7 +28,7 @@ export default function Album({
   playTrack,
 }: AlbumProps) {
   return (
-    <div className="bg-zinc-100 px-2 py-[80px]">
+    <div className="bg-zinc-100 px-2 py-[80px]" id="album-section">
       <div className="space-y-4 mb-4">
         <h2 className="mx-auto font-bold text-3xl text-center tracking-widest">
           ALBUM

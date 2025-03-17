@@ -9,9 +9,12 @@ import UpTo from "../components/UpTo";
 import useAudio from "../hooks/useAudio";
 import Init from "../components/Init";
 import Sales from "../components/Sales";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router";
 
 export default function Home() {
+  const footerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
   const {
     waveRef,
     isPlaying,
@@ -23,7 +26,15 @@ export default function Home() {
     playTrack,
   } = useAudio({});
 
-  const footerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (location.hash) {
+      const target = document.getElementById(location.hash.substring(1));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
     <div className="relative">
       <title>LEGENDES | Accueil</title>

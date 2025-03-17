@@ -1,39 +1,7 @@
-import { useState } from "react";
 import Stream from "../../public/assets/stream.webp";
-import useArticle from "../stores/article";
-import axios from "axios";
-import { SERVER_HOST } from "../lib/constant";
-import { albums } from "../datas/albums";
-import { LoaderIcon } from "./icons/Icons";
+import PaymentButton from "./ui/PaymentButton";
 
 export default function Hero() {
-  const setId = useArticle.use.setId();
-  const [isPending, setIsPending] = useState(false);
-
-  async function handleStripe(e: React.SyntheticEvent) {
-    setIsPending(true);
-    e.preventDefault();
-    e.stopPropagation();
-
-    const response = await axios({
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      url: `${SERVER_HOST}/create-checkout-session`,
-      data: { playlist: albums },
-      timeout: 30000,
-    });
-
-    if (response.status !== 200) {
-      setIsPending(false);
-    }
-
-    const { id, url } = response.data;
-    if (id && url) {
-      setId(id);
-      window.location.assign(url);
-    }
-    setIsPending(false);
-  }
   return (
     <div className="relative">
       <div className="top-1/2 left-1/2 absolute flex justify-center items-center p-2 w-full h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none">
@@ -63,18 +31,7 @@ export default function Hero() {
           <h2 className="font-light text-neutral-100 text-lg text-center uppercase">
             Acheter l'album complet à 5000 FCFA
           </h2>
-          <button
-            onClick={handleStripe}
-            className="flex justify-center items-center bg-neutral-200 mx-auto rounded-md w-[150px] h-11 text-[#131112] cursor-pointer"
-          >
-            {isPending ? (
-              <span className="flex justify-center items-center w-5 h-5 animate-spin duration-500 ease-in-out">
-                <LoaderIcon className="fill-[#131112]" />
-              </span>
-            ) : (
-              "Acheter"
-            )}
-          </button>
+          <PaymentButton />
         </div>
       </div>
     </div>

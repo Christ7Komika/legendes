@@ -68,6 +68,7 @@ export default function useAudio({
         });
 
         return () => {
+
             if (wavesurferRef.current) {
                 wavesurferRef.current.destroy();
                 wavesurferRef.current = null;
@@ -75,10 +76,20 @@ export default function useAudio({
         };
     }, [currentTrackIndex, canPlay, enableAutoPlayNext]);
 
-    function enablePlay() {
-        setCanPlay(true);
-        document.removeEventListener("click", enablePlay);
+    useEffect(() => {
+        document.addEventListener("click", enablePlay);
+        return () => document.removeEventListener("click", enablePlay);
+    }, []);
+
+    function enablePlay(event: MouseEvent) {
+        // Vérifie si le clic provient d'un bouton spécifique lié à l'audio
+        const target = event.target as HTMLElement;
+        if (target.closest(".audio-control")) {
+            setCanPlay(true);
+            document.removeEventListener("click", enablePlay);
+        }
     }
+
 
     useEffect(() => {
         document.addEventListener("click", enablePlay);

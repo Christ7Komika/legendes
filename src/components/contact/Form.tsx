@@ -29,7 +29,6 @@ export default function Form() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // 🟢 UseEffect pour retirer les erreurs en temps réel, mais seulement après soumission
   useEffect(() => {
     if (!isSubmitted) return; // Ne faire la vérification que si le formulaire a été soumis
 
@@ -106,8 +105,6 @@ export default function Form() {
       setIsPending(false);
     }
   }
-
-  console.log({ message });
 
   return (
     <form onSubmit={submit} className="space-y-3 w-full">

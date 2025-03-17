@@ -11,6 +11,8 @@ import CompletedPayment from "./pages/CompletedPayment";
 import FailedPayment from "./pages/FailedPayment";
 import Contact from "./pages/Contact";
 import { Analytics } from "@vercel/analytics/react";
+import MobilePayment from "./pages/MobilePayment";
+import NotFound from "./pages/NotFound";
 
 const rootEl = document.getElementById("root");
 if (rootEl) {
@@ -25,6 +27,10 @@ if (rootEl) {
           <Route path="/contact" element={<Contact />} />
           <Route path="/telecharger" element={<CompletedPayment />} />
           <Route path="/payement-echoue" element={<FailedPayment />} />
+          <Route path="/payement-mobile-money" element={<MobilePayment />} />
+          <Route path="/confirmation-payement" element={<MobilePayment />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
       <Analytics />

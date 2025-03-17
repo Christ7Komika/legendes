@@ -46,7 +46,7 @@ export default function Navbar() {
         )}
       >
         <li>
-          <NavLink to="/">ALBUM</NavLink>
+          <NavLink to="/#album-section">ALBUM</NavLink>
         </li>
         <li>
           <NavLink to="/contact">CONTACT</NavLink>

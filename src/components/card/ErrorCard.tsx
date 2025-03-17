@@ -3,14 +3,20 @@ import { XIcon } from "../icons/Icons";
 
 type ErrorCardProps = {
   type: "error" | "success";
+  message?: string;
   setMessage: React.Dispatch<
     React.SetStateAction<{
       success: boolean;
       error: boolean;
+      text?: string;
     }>
   >;
 };
-export default function ErrorCard({ type, setMessage }: ErrorCardProps) {
+export default function ErrorCard({
+  type,
+  setMessage,
+  message,
+}: ErrorCardProps) {
   return (
     <div
       className={clsx(
@@ -31,8 +37,14 @@ export default function ErrorCard({ type, setMessage }: ErrorCardProps) {
           )}
         />
       </span>
-      {type === "error" && " Une erreur produite lors de l'envoi du mail"}
-      {type === "success" && "Votre mail a bien été envoyé"}
+      <p className="text-sm">
+        {message && type === "error" && message}
+        {!message &&
+          type === "error" &&
+          " Une erreur produite lors de l'envoi du mail"}
+        {message && type === "success" && message}
+        {!message && type === "success" && "Votre mail a bien été envoyé"}
+      </p>
     </div>
   );
 }

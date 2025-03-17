@@ -89,6 +89,9 @@ export default function PricingCardMobile({
       </div>
       <div className="gap-x-2 gap-y-2 sm:gap-x-3 grid grid-cols-1 px-2 sm:px-8">
         <Button type="stripe" onClick={handleStripe} isPending={isPending} />
+        <a href="/payement-mobile-money">
+          <Button type="mtn" isPending={isPending} />
+        </a>
       </div>
     </div>
   );

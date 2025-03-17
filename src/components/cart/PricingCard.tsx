@@ -72,6 +72,9 @@ export default function PricingCard({ albums, removeAlbum }: PricingCardProps) {
 
         <div className="gap-y-2 grid grid-cols-1 pt-2">
           <Button type="stripe" onClick={handleStripe} isPending={isPending} />
+          <a href="/payement-mobile-money">
+            <Button type="mtn" isPending={isPending} />
+          </a>
         </div>
       </div>
     </div>

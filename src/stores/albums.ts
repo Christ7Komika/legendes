@@ -6,8 +6,11 @@ type AlbumProps = {
     playlist: PlaylistType;
     state: "load" | "success",
     albums: AlbumCartType[],
+    all: boolean;
     username: string;
     email: string;
+    setAll: (state: boolean) => void
+    pushAlbums: (newAlbum: AlbumCartType[]) => void;
     setPlaylist: (song: PlaylistKeyType) => void
     setState: (state: "load" | "success") => void;
     setUserInfos: (username: string, email?: string) => void;
@@ -34,10 +37,17 @@ const useAlbums = createSelectors(create<AlbumProps>()(
                 "Rando Rando": false,
                 "Na ke": false,
             },
+            all: false,
             state: "load",
             username: "",
             email: "",
             albums: [],
+            pushAlbums(songs) {
+                set({ albums: [...songs] })
+            },
+            setAll(state) {
+                set({ all: state })
+            },
             setPlaylist(song) {
                 const playlist = useAlbums.getState().playlist;
                 set({ playlist: { ...playlist, [song]: true } })

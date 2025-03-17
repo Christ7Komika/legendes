@@ -5,6 +5,7 @@ type LabelProps = {
   id: string;
   children: React.ReactNode;
   error?: string;
+  className?: string;
 };
 
 export default function Label({
@@ -12,12 +13,13 @@ export default function Label({
   id,
   children,
   error = "Champs invalide",
+  className,
 }: LabelProps) {
   return (
     <div className="flex flex-col space-y-1">
       <label
         htmlFor={id}
-        className={clsx(error ? "text-red-600" : "text-neutral-600")}
+        className={clsx(error ? "text-red-600" : "text-neutral-600", className)}
       >
         {title} <span className="text-red-600">*</span>
       </label>
